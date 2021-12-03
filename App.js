@@ -7,6 +7,10 @@ import { createStore, combineReducers } from "redux";
 import { Provider, connect } from "react-redux";
 import { ToastAndroid, Platform, AlertIOS } from "react-native";
 import Toast from "react-native-simple-toast";
+import Swipe from "./components/Swipe";
+import GestureRecognizer, {
+  swipeDirections,
+} from "react-native-swipe-gestures";
 
 const tokyoRegion = {
   latitude: 35.6762,
@@ -34,10 +38,11 @@ const tokyoRegion3 = {
 };
 export default function App() {
   const [location, setLocation] = useState(null);
+  const [showLocation, setShowLocation] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
-
+  const [showMap, setShowMap] = useState(false);
   const [region, setRegion] = useState({
     latitude: 51.5079145,
     longitude: -0.0899163,
@@ -58,13 +63,6 @@ export default function App() {
     })();
   }, []);
 
-  function showLocation() {
-    ToastAndroid.show(
-      `This is your location: ${latitude}:${longitude}`,
-      Toast.LONG
-    );
-  }
-
   let text = "Waiting..";
   if (errorMsg) {
     text = errorMsg;
@@ -81,21 +79,46 @@ export default function App() {
       <Text style={styles.coord}>{longitude}</Text>
       <Text style={styles.text}>Current latitude: {region.latitude}</Text>
       <Text style={styles.text}>Current longitude: {region.longitude}</Text>
-      <Button
-        color="#841584"
-        title="GET LOCATION"
-        onPress={() => showLocation()}
-      />
-      <MapView
-        initialRegion={tokyoRegion}
-        style={styles.map}
-        onRegionChangeComplete={(region) => setRegion(region)}
-      >
-        <Marker coordinate={tokyoRegion} />
-        <Marker coordinate={tokyoRegion1} />
-        <Marker coordinate={tokyoRegion2} />
-        <Marker coordinate={tokyoRegion3} />
-      </MapView>
+      <View style={styles.buttonsBg}>
+        <Button
+          color="#841584"
+          title="SHOW LOCATION"
+          onPress={() => setShowLocation(!showLocation)}
+        />
+        <Swipe />
+
+        <Button
+          color="#841584"
+          title="SHOW MAP"
+          onPress={() => setShowMap(!showMap)}
+        />
+      </View>
+
+      {showMap ? (
+        <MapView
+          initialRegion={tokyoRegion}
+          style={styles.map}
+          onRegionChangeComplete={(region) => setRegion(region)}
+        >
+          <Marker coordinate={tokyoRegion} />
+          <Marker coordinate={tokyoRegion1} />
+          <Marker coordinate={tokyoRegion2} />
+          <Marker coordinate={tokyoRegion3} />
+        </MapView>
+      ) : (
+        <View>
+          <Swipe />
+          <Text>No map</Text>
+        </View>
+      )}
+      {showLocation ? (
+        <Text>{text}</Text>
+      ) : (
+        <View>
+          {/* <Swipe /> */}
+          <Text>No map</Text>
+        </View>
+      )}
     </View>
   );
 }
@@ -114,5 +137,8 @@ const styles = StyleSheet.create({
   map: {
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
+  },
+  buttonsBg: {
+    marginTop: 20,
   },
 });
