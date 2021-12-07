@@ -67,9 +67,6 @@ const Geo = () => {
 
   return (
     <View>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>ConsEducation</Text>
-      </View>
       <Text style={styles.coord}>{latitude}</Text>
       <Text style={styles.coord}>{longitude}</Text>
       <Text style={styles.text}>Current latitude: {region.latitude}</Text>
@@ -150,3 +147,5 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 });
+
+export default Geo;
