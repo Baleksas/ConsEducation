@@ -66,10 +66,14 @@ const Geo = () => {
   }, []);
 
   let text = "Waiting..";
+  let long;
+  let lat;
   if (errorMsg) {
     text = errorMsg;
   } else if (location) {
     text = JSON.stringify(location.coords);
+    long = JSON.stringify(location.coords.longitude);
+    lat = JSON.stringify(location.coords.latitude);
     // infinit loop renders
     // setLatitude(JSON.stringify(location.coords.latitude));
     // setLongitude(JSON.stringify(location.coords.longitude));
@@ -77,6 +81,15 @@ const Geo = () => {
   const handleHome = () => {
     navigation.replace("Home");
   };
+  const handleLocation = () => {
+    setRegion({
+      latitude: parseFloat(lat),
+      longitude: parseFloat(long),
+      latitudeDelta: 0.01,
+      longitudeDelta: 0.01,
+    });
+  };
+  useEffect(() => {}, [region]);
   return (
     <View>
       <Text style={styles.coord}>{latitude}</Text>
@@ -89,19 +102,22 @@ const Geo = () => {
           title="SHOW LOCATION"
           onPress={() => setShowLocation(!showLocation)}
         />
-        <TouchableOpacity onPress={handleHome} style={styles.button}>
-          <Text style={styles.buttonText}>Home</Text>
-        </TouchableOpacity>
+
         <Button
           color="#841584"
           title="SHOW MAP"
           onPress={() => setShowMap(!showMap)}
         />
+        <Button
+          color="#841584"
+          title="SHOW MY LOCATION ON MAP"
+          onPress={handleLocation}
+        />
       </View>
 
       {showMap ? (
         <MapView
-          initialRegion={tokyoRegion}
+          initialRegion={region}
           style={styles.map}
           onRegionChangeComplete={(region) => setRegion(region)}
         >
@@ -119,9 +135,12 @@ const Geo = () => {
         <Text>{text}</Text>
       ) : (
         <View>
-          <Text>No map</Text>
+          <Text>No location</Text>
         </View>
       )}
+      <TouchableOpacity onPress={handleHome} style={styles.button}>
+        <Text style={styles.buttonText}>Home</Text>
+      </TouchableOpacity>
     </View>
   );
 };
