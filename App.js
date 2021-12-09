@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-import React, { useState, useEffect } from "react";
-
-import { StyleSheet, Text, View, Dimensions, Button } from "react-native";
-
-export default function App() {
-  return (
-    <View>
-      <Text style={styles.text}>Hello world</Text>
-    </View>
-=======
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
@@ -31,18 +20,16 @@ export default function App() {
         <Stack.Screen name="Home" component={HomeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
->>>>>>> alex_feature_auth
   );
 }
 
 const styles = StyleSheet.create({
-<<<<<<< HEAD
   text: {
     color: "red",
     alignSelf: "center",
     top: 200,
     fontSize: 50,
-=======
+  },
   container: {
     flex: 1,
     backgroundColor: "#fff",
@@ -64,6 +51,5 @@ const styles = StyleSheet.create({
   },
   buttonsBg: {
     marginTop: 20,
->>>>>>> alex_feature_auth
   },
 });
