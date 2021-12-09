@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from "react";
+import { useNavigation } from "@react-navigation/core";
+
 import * as Location from "expo-location";
 import MapView from "react-native-maps";
 import { Marker } from "react-native-maps";
-import { StyleSheet, Text, View, Dimensions, Button } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  Button,
+  TouchableOpacity,
+} from "react-native";
 
 const tokyoRegion = {
   latitude: 35.6762,
@@ -41,6 +50,7 @@ const Geo = () => {
     latitudeDelta: 0.01,
     longitudeDelta: 0.01,
   });
+  const navigation = useNavigation();
 
   useEffect(() => {
     (async () => {
@@ -64,7 +74,9 @@ const Geo = () => {
     // setLatitude(JSON.stringify(location.coords.latitude));
     // setLongitude(JSON.stringify(location.coords.longitude));
   }
-
+  const handleHome = () => {
+    navigation.replace("Home");
+  };
   return (
     <View>
       <Text style={styles.coord}>{latitude}</Text>
@@ -77,7 +89,9 @@ const Geo = () => {
           title="SHOW LOCATION"
           onPress={() => setShowLocation(!showLocation)}
         />
-
+        <TouchableOpacity onPress={handleHome} style={styles.button}>
+          <Text style={styles.buttonText}>Home</Text>
+        </TouchableOpacity>
         <Button
           color="#841584"
           title="SHOW MAP"
@@ -118,14 +132,7 @@ const styles = StyleSheet.create({
     color: "black",
     fontSize: 40,
   },
-  header: {
-    backgroundColor: "#b1dd9e",
-    height: 100,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    width: Dimensions.get("window").width,
-  },
+
   headerTitle: {
     alignItems: "center",
     flexDirection: "row",
@@ -133,18 +140,28 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 23,
   },
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+
   map: {
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
   },
-  buttonsBg: {
-    marginTop: 20,
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  button: {
+    backgroundColor: "#0782F9",
+    width: "60%",
+    padding: 15,
+    borderRadius: 10,
+    alignItems: "center",
+    marginTop: 40,
+  },
+  buttonText: {
+    color: "white",
+    fontWeight: "700",
+    fontSize: 16,
   },
 });
 

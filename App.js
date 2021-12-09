@@ -41,42 +41,6 @@
 //   );
 // }
 
-// const styles = StyleSheet.create({
-//   coord: {
-//     margin: 10,
-//     color: "black",
-//     fontSize: 40,
-//   },
-//   header: {
-//     backgroundColor: "#b1dd9e",
-//     height: 100,
-//     display: "flex",
-//     flexDirection: "column",
-//     justifyContent: "center",
-//     width: Dimensions.get("window").width,
-//   },
-//   headerTitle: {
-//     alignItems: "center",
-//     flexDirection: "row",
-//     marginVertical: 5,
-//     textAlign: "center",
-//     fontSize: 23,
-//   },
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#fff",
-//     alignItems: "center",
-//     justifyContent: "center",
-//   },
-//   map: {
-//     width: Dimensions.get("window").width,
-//     height: Dimensions.get("window").height,
-//   },
-//   buttonsBg: {
-//     marginTop: 20,
-//   },
-// });
-
 // export default App;
 import { StatusBar } from "expo-status-bar";
 import React from "react";
@@ -85,7 +49,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "./screens/LoginScreen";
 import HomeScreen from "./screens/HomeScreen";
-
+import Geo from "./screens/Geo";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -97,6 +61,7 @@ export default function App() {
           name="Login"
           component={LoginScreen}
         />
+        <Stack.Screen name="Geo" component={Geo} />
         <Stack.Screen name="Home" component={HomeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
@@ -109,5 +74,21 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  coord: {
+    margin: 10,
+    color: "black",
+    fontSize: 40,
+  },
+
+  headerTitle: {
+    alignItems: "center",
+    flexDirection: "row",
+    marginVertical: 5,
+    textAlign: "center",
+    fontSize: 23,
+  },
+  buttonsBg: {
+    marginTop: 20,
   },
 });
