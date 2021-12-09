@@ -89,14 +89,13 @@ const Geo = () => {
       longitudeDelta: 0.01,
     });
   };
-  useEffect(() => {}, [region]);
   return (
     <View>
       <Text style={styles.coord}>{latitude}</Text>
       <Text style={styles.coord}>{longitude}</Text>
       <Text style={styles.text}>Current latitude: {region.latitude}</Text>
       <Text style={styles.text}>Current longitude: {region.longitude}</Text>
-      <View style={styles.buttonsBg}>
+      <View>
         <Button
           color="#841584"
           title="SHOW LOCATION"
@@ -110,14 +109,14 @@ const Geo = () => {
         />
         <Button
           color="#841584"
-          title="SHOW MY LOCATION ON MAP"
+          title="SHOW MY LOCATION ON THE MAP"
           onPress={handleLocation}
         />
       </View>
 
       {showMap ? (
         <MapView
-          initialRegion={region}
+          region={region}
           style={styles.map}
           onRegionChangeComplete={(region) => setRegion(region)}
         >
@@ -147,17 +146,12 @@ const Geo = () => {
 
 const styles = StyleSheet.create({
   coord: {
-    margin: 10,
     color: "black",
-    fontSize: 40,
   },
-
   headerTitle: {
     alignItems: "center",
     flexDirection: "row",
-    marginVertical: 5,
     textAlign: "center",
-    fontSize: 23,
   },
 
   map: {
@@ -175,7 +169,6 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     alignItems: "center",
-    marginTop: 40,
   },
   buttonText: {
     color: "white",
