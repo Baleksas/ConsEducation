@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/core";
 import * as Location from "expo-location";
 import MapView from "react-native-maps";
 import { Marker } from "react-native-maps";
+import map from "../customMap";
 import {
   StyleSheet,
   Text,
@@ -11,6 +12,7 @@ import {
   Dimensions,
   Button,
   TouchableOpacity,
+  Pressable,
 } from "react-native";
 
 const tokyoRegion = {
@@ -91,34 +93,40 @@ const Geo = () => {
   };
   return (
     <View>
-      <Text style={styles.coord}>{latitude}</Text>
-      <Text style={styles.coord}>{longitude}</Text>
-      <Text style={styles.text}>Current latitude: {region.latitude}</Text>
-      <Text style={styles.text}>Current longitude: {region.longitude}</Text>
+      <View style={styles.flex}>
+        <Text style={styles.text}>
+          Current latitude: {parseFloat(region.latitude).toFixed(2)}
+        </Text>
+        <Text style={styles.text}>
+          Current longitude: {parseFloat(region.longitude).toFixed(2)}
+        </Text>
+      </View>
       <View>
-        <Button
+        {/* <Button
           color="#841584"
           title="SHOW LOCATION"
           onPress={() => setShowLocation(!showLocation)}
-        />
-
-        <Button
-          color="#841584"
-          title="SHOW MAP"
-          onPress={() => setShowMap(!showMap)}
-        />
-        <Button
-          color="#841584"
-          title="SHOW MY LOCATION ON THE MAP"
-          onPress={handleLocation}
-        />
+        /> */}
+        <View style={styles.flex}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => setShowMap(!showMap)}
+          >
+            <Text style={styles.text}>SHOW MAP</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={handleLocation}>
+            <Text style={styles.text}>SHOW MY LOCATION ON THE MAP</Text>
+          </TouchableOpacity>
+        </View>
       </View>
 
       {showMap ? (
         <MapView
+          showsMyLocationButton={true}
           region={region}
           style={styles.map}
           onRegionChangeComplete={(region) => setRegion(region)}
+          customMapStyle={map}
         >
           <Marker coordinate={tokyoRegion} />
           <Marker coordinate={tokyoRegion1} />
@@ -130,33 +138,36 @@ const Geo = () => {
           <Text>No map</Text>
         </View>
       )}
-      {showLocation ? (
+      {/* {showLocation ? (
         <Text>{text}</Text>
       ) : (
         <View>
           <Text>No location</Text>
         </View>
-      )}
-      <TouchableOpacity onPress={handleHome} style={styles.button}>
-        <Text style={styles.buttonText}>Home</Text>
-      </TouchableOpacity>
+      )} */}
+      <View style={styles.flex}>
+        <TouchableOpacity style={styles.button} onPress={handleHome}>
+          <Text style={styles.text}>HOME</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  coord: {
-    color: "black",
-  },
-  headerTitle: {
-    alignItems: "center",
+  flex: {
     flexDirection: "row",
-    textAlign: "center",
+    justifyContent: "space-around",
+    width: Dimensions.get("window").width,
   },
 
   map: {
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
+    height: Dimensions.get("window").height * 0.7,
+    marginBottom: 20,
+    marginTop: 20,
+    alignSelf: "center",
+    borderColor: "black",
   },
   container: {
     flex: 1,
@@ -167,9 +178,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#0782F9",
     width: "60%",
     padding: 15,
-    borderRadius: 10,
     alignItems: "center",
+    marginTop: 40,
   },
+  buttonText: {
+    color: "white",
+    fontWeight: "700",
+    fontSize: 16,
+  },
+
   buttonText: {
     color: "white",
     fontWeight: "700",
