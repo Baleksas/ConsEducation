@@ -114,9 +114,11 @@ const Geo = () => {
           >
             <Text style={styles.buttonText}>SHOW MAP</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={handleLocation}>
-            <Text style={styles.buttonText}>SHOW MY LOCATION ON THE MAP</Text>
-          </TouchableOpacity>
+          {showMap && (
+            <TouchableOpacity style={styles.button} onPress={handleLocation}>
+              <Text style={styles.buttonText}>SHOW MY LOCATION ON THE MAP</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
 
