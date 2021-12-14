@@ -18,12 +18,18 @@ const HomeScreen = () => {
   const handleGeo = () => {
     navigation.replace("Geo");
   };
+  const handleAnimals = () => {
+    navigation.replace("Animals");
+  };
 
   return (
     <View style={styles.container}>
       <Text>Email: {auth.currentUser?.email}</Text>
       <TouchableOpacity onPress={handleGeo} style={styles.button}>
         <Text style={styles.buttonText}>GPS</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleAnimals} style={styles.button}>
+        <Text style={styles.buttonText}>Animals</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={handleSignOut} style={styles.button}>
         <Text style={styles.buttonText}>Sign out</Text>

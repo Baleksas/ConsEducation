@@ -66,7 +66,9 @@ const Geo = () => {
       setLocation(location);
     })();
   }, []);
-
+  const handleHome = () => {
+    navigation.replace("Home");
+  };
   let text = "Waiting..";
   let long;
   let lat;
@@ -80,9 +82,7 @@ const Geo = () => {
     // setLatitude(JSON.stringify(location.coords.latitude));
     // setLongitude(JSON.stringify(location.coords.longitude));
   }
-  const handleHome = () => {
-    navigation.replace("Home");
-  };
+
   const handleLocation = () => {
     setRegion({
       latitude: parseFloat(lat),
@@ -112,10 +112,10 @@ const Geo = () => {
             style={styles.button}
             onPress={() => setShowMap(!showMap)}
           >
-            <Text style={styles.text}>SHOW MAP</Text>
+            <Text style={styles.buttonText}>SHOW MAP</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={handleLocation}>
-            <Text style={styles.text}>SHOW MY LOCATION ON THE MAP</Text>
+            <Text style={styles.buttonText}>SHOW MY LOCATION ON THE MAP</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -147,7 +147,7 @@ const Geo = () => {
       )} */}
       <View style={styles.flex}>
         <TouchableOpacity style={styles.button} onPress={handleHome}>
-          <Text style={styles.text}>HOME</Text>
+          <Text style={styles.buttonText}>HOME</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -181,12 +181,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 40,
   },
-  buttonText: {
-    color: "white",
-    fontWeight: "700",
-    fontSize: 16,
-  },
-
   buttonText: {
     color: "white",
     fontWeight: "700",
