@@ -21,24 +21,7 @@ const tokyoRegion = {
   latitudeDelta: 0.01,
   longitudeDelta: 0.01,
 };
-const tokyoRegion1 = {
-  latitude: 35.6762,
-  longitude: 139.6503,
-  latitudeDelta: 0.01,
-  longitudeDelta: 0.01,
-};
-const tokyoRegion2 = {
-  latitude: 35.7762,
-  longitude: 139.8503,
-  latitudeDelta: 0.01,
-  longitudeDelta: 0.01,
-};
-const tokyoRegion3 = {
-  latitude: 36.6762,
-  longitude: 139.9503,
-  latitudeDelta: 0.01,
-  longitudeDelta: 0.01,
-};
+
 const Geo = () => {
   const [location, setLocation] = useState(null);
   const [showLocation, setShowLocation] = useState(false);
@@ -94,19 +77,23 @@ const Geo = () => {
   return (
     <View>
       <View style={styles.flex}>
-        <Text style={styles.text}>
+        <Text style={styles.locationText}>
           Current latitude: {parseFloat(region.latitude).toFixed(2)}
         </Text>
-        <Text style={styles.text}>
+        <Text style={styles.locationText}>
           Current longitude: {parseFloat(region.longitude).toFixed(2)}
         </Text>
       </View>
       <View>
-        {/* <Button
-          color="#841584"
-          title="SHOW LOCATION"
-          onPress={() => setShowLocation(!showLocation)}
-        /> */}
+        <Text style={styles.locationText}>
+          {location
+            ? `Your location: (${JSON.stringify(
+                location.coords.latitude
+              )}, ${JSON.stringify(location.coords.longitude)})
+              `
+            : "No location"}
+        </Text>
+        <Text>{location && `Updated ago: ${location.timestamp / 1000}`}</Text>
         <View style={styles.flex}>
           <TouchableOpacity
             style={styles.button}
@@ -131,22 +118,13 @@ const Geo = () => {
           customMapStyle={map}
         >
           <Marker coordinate={tokyoRegion} />
-          <Marker coordinate={tokyoRegion1} />
-          <Marker coordinate={tokyoRegion2} />
-          <Marker coordinate={tokyoRegion3} />
         </MapView>
       ) : (
         <View>
           <Text>No map</Text>
         </View>
       )}
-      {/* {showLocation ? (
-        <Text>{text}</Text>
-      ) : (
-        <View>
-          <Text>No location</Text>
-        </View>
-      )} */}
+
       <View style={styles.flex}>
         <TouchableOpacity style={styles.button} onPress={handleHome}>
           <Text style={styles.buttonText}>HOME</Text>
@@ -166,8 +144,6 @@ const styles = StyleSheet.create({
   map: {
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height * 0.7,
-    marginBottom: 20,
-    marginTop: 20,
     alignSelf: "center",
     borderColor: "black",
   },
@@ -176,12 +152,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  locationText: {
+    color: "white",
+    backgroundColor: "#0782A2",
+    padding: 15,
+    textAlign: "center",
+  },
   button: {
     backgroundColor: "#0782F9",
     width: "60%",
     padding: 15,
     alignItems: "center",
-    marginTop: 40,
   },
   buttonText: {
     color: "white",

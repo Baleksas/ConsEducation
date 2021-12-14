@@ -42,9 +42,8 @@ const Animals = () => {
     })
       .then((response) => response.json())
       .then((json) => {
-        console.log(json.results.length);
+        console.log(json.results[0]);
         json.results.forEach((element) => {
-          console.log(element.primaryCommonName);
           array.push(element.primaryCommonName);
         });
         // setAnimalsList(JSON.stringify(json.results, null, 10));
