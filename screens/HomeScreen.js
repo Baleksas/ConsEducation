@@ -21,6 +21,9 @@ const HomeScreen = () => {
   const handleAnimals = () => {
     navigation.replace("Animals");
   };
+  const handleCamera = () => {
+    navigation.replace("Camera")
+  }
 
   return (
     <View style={styles.container}>
@@ -30,6 +33,9 @@ const HomeScreen = () => {
       </TouchableOpacity>
       <TouchableOpacity onPress={handleAnimals} style={styles.button}>
         <Text style={styles.buttonText}>Animals</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleCamera} style={styles.button}>
+        <Text style={styles.buttonText}>Camera </Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={handleSignOut} style={styles.button}>
         <Text style={styles.buttonText}>Sign out</Text>
