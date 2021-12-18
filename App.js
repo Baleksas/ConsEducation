@@ -5,6 +5,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "./screens/LoginScreen";
 import HomeScreen from "./screens/HomeScreen";
+import Animals from "./screens/Animals";
+
 import Geo from "./screens/Geo";
 import RegisterScreen from "./screens/RegisterScreen";
 import GuestAccessScreen from "./screens/GuestAccessScreen";
@@ -37,18 +39,13 @@ export default function App()  {
         />
         <Stack.Screen name="Geo" component={Geo} />
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Animals" component={Animals} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  text: {
-    color: "red",
-    alignSelf: "center",
-    top: 200,
-    fontSize: 50,
-  },
   container: {
     flex: 1,
     backgroundColor: "#fff",
