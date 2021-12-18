@@ -2,6 +2,11 @@ import { useNavigation } from "@react-navigation/core";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { auth } from "../firebase";
+import Camera from "./CameraScreen";
+// TODO: needs back button at top left of page, should replace home button
+// TODO: Auto generate map rather than button for it?
+// TODO implement tab bar
+
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -19,11 +24,25 @@ const HomeScreen = () => {
     navigation.replace("Geo");
   };
 
+  const handleCamera = () => {
+      navigation.replace("Camera")
+
+      // return(
+      //   <View style={styles.container}>
+      //       <Camera />
+      //   </View>
+      // )
+  };
+
+
   return (
     <View style={styles.container}>
       <Text>Email: {auth.currentUser?.email}</Text>
       <TouchableOpacity onPress={handleGeo} style={styles.button}>
         <Text style={styles.buttonText}>GPS</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleCamera} style={styles.button}>
+        <Text style={styles.buttonText}>Camera</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={handleSignOut} style={styles.button}>
         <Text style={styles.buttonText}>Sign out</Text>
