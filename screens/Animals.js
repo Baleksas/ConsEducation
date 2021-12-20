@@ -9,8 +9,15 @@ import {
 import { useNavigation } from "@react-navigation/core";
 
 const Animals = () => {
-  const [animalsList, setAnimalsList] = useState();
-  let array = [];
+  const [commonNames, setCommonNames] = useState([]);
+  const [roundedGRanks, setRoundedGRanks] = useState([]);
+  const [scientificNames, setScientificNames] = useState([]);
+  const [taxonomicComments, setTaxonomicComments] = useState([]);
+  const [nations, setNations] = useState([]);
+
+  const [isExotic, setIsExotic] = useState([]);
+  const [isNative, setIsNative] = useState([]);
+
   const navigation = useNavigation();
 
   const [isLoading, setIsLoading] = useState(true);
@@ -42,12 +49,25 @@ const Animals = () => {
     })
       .then((response) => response.json())
       .then((json) => {
-        console.log(json.results[0]);
         json.results.forEach((element) => {
-          array.push(element.primaryCommonName);
+          setCommonNames((commonNames) => [
+            ...commonNames,
+            element.primaryCommonName,
+          ]);
+          setRoundedGRanks((roundedGRanks) => [
+            ...roundedGRanks,
+            element.gRank,
+          ]);
+          setScientificNames((scientificNames) => [
+            ...scientificNames,
+            element.scientificName,
+          ]);
+          setTaxonomicComments((taxonomicComments) => [
+            ...taxonomicComments,
+            element.speciesGlobal.taxonomicComments,
+          ]);
+          setNations((nations) => [...nations, element.nations]);
         });
-        // setAnimalsList(JSON.stringify(json.results, null, 10));
-        setAnimalsList(array);
         setIsLoading(false);
         return json;
       })
@@ -57,7 +77,20 @@ const Animals = () => {
   }, []);
   return (
     <ScrollView>
-      {!isLoading ? <Text>{animalsList}</Text> : <Text>Loading...</Text>}
+      {!isLoading ? (
+        <>
+          <Text>{commonNames}</Text>
+          <Text>{roundedGRanks}</Text>
+          <Text>{scientificNames}</Text>
+          <Text>{taxonomicComments}</Text>
+          <Text>{JSON.stringify(nations, null, 5)}</Text>
+        </>
+      ) : (
+        // commonNames.forEach((el, index) => {
+        //     <Text>{commonNames[index]}</Text>{" "}
+        //     <Text>{roundedGRanks[index]}</Text>{" "}
+        <Text>Loading...</Text>
+      )}
       <TouchableOpacity style={styles.button} onPress={handleHome}>
         <Text style={styles.buttonText}>Home</Text>
       </TouchableOpacity>

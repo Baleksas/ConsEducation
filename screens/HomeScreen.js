@@ -30,7 +30,7 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text>Email: {auth.currentUser?.email}</Text>
+      <Text style={styles.email}>Email: {auth.currentUser?.email}</Text>
       <TouchableOpacity onPress={handleGeo} style={styles.button}>
         <Text style={styles.buttonText}>GPS</Text>
       </TouchableOpacity>
@@ -57,6 +57,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  email: {
+    fontSize: 22,
+    color: "black",
   },
   button: {
     backgroundColor: "#0782F9",
