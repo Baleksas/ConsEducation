@@ -6,11 +6,15 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "./screens/LoginScreen";
 import HomeScreen from "./screens/HomeScreen";
 import Animals from "./screens/Animals";
+import Plants from "./screens/Plants";
 
 import Geo from "./screens/Geo";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const handleHome = () => {
+    navigation.replace("Home");
+  };
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -22,6 +26,7 @@ export default function App() {
         <Stack.Screen name="Geo" component={Geo} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Animals" component={Animals} />
+        <Stack.Screen name="Plants" component={Plants} />
       </Stack.Navigator>
     </NavigationContainer>
   );

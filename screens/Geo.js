@@ -36,7 +36,9 @@ const Geo = () => {
     longitudeDelta: 0.01,
   });
   const navigation = useNavigation();
-
+  const handleHome = () => {
+    navigation.replace("Home");
+  };
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -49,9 +51,7 @@ const Geo = () => {
       setLocation(location);
     })();
   }, []);
-  const handleHome = () => {
-    navigation.replace("Home");
-  };
+
   let text = "Waiting..";
   let long;
   let lat;
@@ -126,7 +126,7 @@ const Geo = () => {
       )}
 
       <View style={styles.flex}>
-        <TouchableOpacity style={styles.button} onPress={handleHome}>
+        <TouchableOpacity style={styles.button} onPress={() => handleHome()}>
           <Text style={styles.buttonText}>HOME</Text>
         </TouchableOpacity>
       </View>

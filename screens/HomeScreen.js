@@ -21,7 +21,9 @@ const HomeScreen = () => {
   const handleAnimals = () => {
     navigation.replace("Animals");
   };
-
+  const handlePlants = () => {
+    navigation.replace("Plants");
+  };
   return (
     <View style={styles.container}>
       <Text>Email: {auth.currentUser?.email}</Text>
@@ -30,6 +32,9 @@ const HomeScreen = () => {
       </TouchableOpacity>
       <TouchableOpacity onPress={handleAnimals} style={styles.button}>
         <Text style={styles.buttonText}>Animals</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handlePlants} style={styles.button}>
+        <Text style={styles.buttonText}>Plants</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={handleSignOut} style={styles.button}>
         <Text style={styles.buttonText}>Sign out</Text>
