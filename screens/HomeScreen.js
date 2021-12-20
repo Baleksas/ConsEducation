@@ -24,6 +24,10 @@ const HomeScreen = () => {
   const handlePlants = () => {
     navigation.replace("Plants");
   };
+  const handleCamera = () => {
+    navigation.replace("Camera");
+  };
+
   return (
     <View style={styles.container}>
       <Text>Email: {auth.currentUser?.email}</Text>
@@ -35,6 +39,9 @@ const HomeScreen = () => {
       </TouchableOpacity>
       <TouchableOpacity onPress={handlePlants} style={styles.button}>
         <Text style={styles.buttonText}>Plants</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleCamera} style={styles.button}>
+        <Text style={styles.buttonText}>Camera </Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={handleSignOut} style={styles.button}>
         <Text style={styles.buttonText}>Sign out</Text>
