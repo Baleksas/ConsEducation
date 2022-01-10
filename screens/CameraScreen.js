@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Dimensions} from 'react-native';
 import { Camera } from 'expo-camera';
 import {useNavigation} from "@react-navigation/core";
@@ -7,6 +7,7 @@ const CameraScreen = () => {
     const navigation = useNavigation();
     const [hasPermission, setHasPermission] = useState(null);
     const [type, setType] = useState(Camera.Constants.Type.back);
+    const ref = useRef(null)
 
     useEffect(() => {
         (async () => {
@@ -23,14 +24,15 @@ const CameraScreen = () => {
     const handleHome = () => {
         navigation.replace("Home")
     }
-    const handlePhoto = () => {
-        //TODO: Taking of Photos
+
+
+    const handlePhoto = async () => {
+        const photo = await ref.current.takePictureAsync()
+        console.debug(photo)
     }
-
-
     return (
         <View style={styles.container}>
-            <Camera style={styles.camera} type={type}>
+            <Camera style={styles.camera} type={type} flashMode={"auto"} ref={ref}>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
                         style={styles.button}
