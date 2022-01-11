@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 // TODO: could use username also for email login since password save on ios saves username not email
 import {
   KeyboardAvoidingView,
+  Image,
   StyleSheet,
   Text,
   TextInput,
@@ -10,6 +11,7 @@ import {
   View,
 } from "react-native";
 import { auth } from "../firebase";
+import logo from "../assets/logo1.png";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -49,6 +51,9 @@ const LoginScreen = () => {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.container}
     >
+      <View style={styles.logoContainer}>
+        <Image source={logo} style={styles.logo}/>
+      </View>
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
@@ -126,5 +131,13 @@ const styles = StyleSheet.create({
     color: "#0782F9",
     fontWeight: "700",
     fontSize: 16,
+  },
+  logoContainer: {
+    marginBottom: 40,
+  },
+  logo: {
+    width: 150,
+    height: 150,
+    padding: 40,
   },
 });
