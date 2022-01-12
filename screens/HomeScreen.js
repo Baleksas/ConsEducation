@@ -6,6 +6,15 @@ import { auth } from "../firebase";
 const HomeScreen = () => {
   const navigation = useNavigation();
 
+    const handleDelete = () => {
+        auth
+            .currentUser.delete()
+            .then(() => {
+                navigation.replace("Login");
+            })
+            .catch((error) => alert(error.message));
+    };
+
   const handleSignOut = () => {
     auth
       .signOut()
@@ -46,6 +55,9 @@ const HomeScreen = () => {
       <TouchableOpacity onPress={handleSignOut} style={styles.button}>
         <Text style={styles.buttonText}>Sign out</Text>
       </TouchableOpacity>
+        <TouchableOpacity onPress={handleDelete} style={styles.button}>
+            <Text style={styles.buttonText}>Delete account</Text>
+        </TouchableOpacity>
     </View>
   );
 };
