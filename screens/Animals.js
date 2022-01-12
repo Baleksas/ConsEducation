@@ -7,15 +7,36 @@ import {
   ScrollView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
-
+// const Animal = (name, rank, scName, comment, nations, isExotic, isNative) => {
+//   return (
+//     <div>
+//       <span>{name}</span>
+//       <span>{rank}</span>
+//       <span>{scName}</span>
+//       <span>{comment}</span>
+//       <span>{nations}</span>
+//       <span>{isExotic}</span>
+//       <span>{isNative}</span>
+//     </div>
+//   );
+// };
 const Animals = () => {
-  const [animalsList, setAnimalsList] = useState();
-  let array = [];
+  const [AnimalsArray, setAnimalsArray] = useState([
+    {
+      name: "",
+      rank: "",
+      scName: "",
+      comment: "",
+      nations: [],
+      isExotic: false,
+      isNative: false,
+    },
+  ]);
   const navigation = useNavigation();
 
   const [isLoading, setIsLoading] = useState(true);
   const handleHome = () => {
-    navigation.replace("Home");
+    navigation.navigate("Home");
   };
   useEffect(() => {
     fetch("https://explorer.natureserve.org/api/data/speciesSearch", {
@@ -31,7 +52,7 @@ const Animals = () => {
         locationCriteria: [],
         pagingOptions: {
           page: null,
-          recordsPerPage: null,
+          recordsPerPage: 300,
         },
         recordSubtypeCriteria: [],
         modifiedSince: null,
@@ -42,12 +63,25 @@ const Animals = () => {
     })
       .then((response) => response.json())
       .then((json) => {
-        console.log(json.results[0]);
         json.results.forEach((element) => {
-          array.push(element.primaryCommonName);
+          console.log(element);
+          setAnimalsArray((AnimalsArray) => [
+            ...AnimalsArray,
+            {
+              name: element.primaryCommonName,
+              rank: element.gRank,
+              scName: element.scientificName,
+              comment: element.speciesGlobal.taxonomicComments,
+              nations: element.nations,
+              lastModified: element.lastModified,
+              saraCode: element.speciesGlobal.saraCode,
+              family: element.speciesGlobal.family,
+              genus: element.speciesGlobal.genus,
+              informalTaxonomy: element.speciesGlobal.informalTaxonomy,
+              completeDistribution: element.speciesGlobal.completeDistribution,
+            },
+          ]);
         });
-        // setAnimalsList(JSON.stringify(json.results, null, 10));
-        setAnimalsList(array);
         setIsLoading(false);
         return json;
       })
@@ -57,7 +91,37 @@ const Animals = () => {
   }, []);
   return (
     <ScrollView>
-      {!isLoading ? <Text>{animalsList}</Text> : <Text>Loading...</Text>}
+      {!isLoading ? (
+        <>
+          {/* <Text>{commonNames}</Text>
+          <Text>{roundedGRanks}</Text>
+          <Text>{scientificNames}</Text>
+          <Text>{taxonomicComments}</Text>
+          <Text>{JSON.stringify(nations, null, 5)}</Text> */}
+          {AnimalsArray.map((element, index) => (
+            <View key={index}>
+              {index !== 0 && <Text>{index}.</Text>}
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("AnimalId", {
+                    ind: index,
+                    works: true,
+                    animal: AnimalsArray[index],
+                  })
+                }
+                style={styles.animalLink}
+              >
+                {index !== 0 && <Text>{element.name}</Text>}
+              </TouchableOpacity>
+            </View>
+          ))}
+        </>
+      ) : (
+        // commonNames.forEach((el, index) => {
+        //     <Text>{commonNames[index]}</Text>{" "}
+        //     <Text>{roundedGRanks[index]}</Text>{" "}
+        <Text>Loading...</Text>
+      )}
       <TouchableOpacity style={styles.button} onPress={handleHome}>
         <Text style={styles.buttonText}>Home</Text>
       </TouchableOpacity>
@@ -80,5 +144,8 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "700",
     fontSize: 16,
+  },
+  animalLink: {
+    color: "#0782F9",
   },
 });

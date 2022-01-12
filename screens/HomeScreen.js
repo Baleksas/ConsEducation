@@ -14,33 +14,31 @@ const HomeScreen = () => {
       })
       .catch((error) => alert(error.message));
   };
-    const handleDelete = () => {
-        auth
-            .currentUser.delete()
-            .then(() => {
-                navigation.replace("Login");
-            })
-            .catch((error) => alert(error.message));
-    };
 
   const handleGeo = () => {
-    navigation.replace("Geo");
+    navigation.navigate("Geo");
   };
   const handleAnimals = () => {
-    navigation.replace("Animals");
+    navigation.navigate("Animals");
+  };
+  const handlePlants = () => {
+    navigation.navigate("Plants");
   };
   const handleCamera = () => {
-    navigation.replace("Camera")
-  }
+    navigation.navigate("Camera");
+  };
 
   return (
     <View style={styles.container}>
-      <Text>Email: {auth.currentUser?.username}</Text>
+      <Text style={styles.email}>Email: {auth.currentUser?.email}</Text>
       <TouchableOpacity onPress={handleGeo} style={styles.button}>
         <Text style={styles.buttonText}>GPS</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={handleAnimals} style={styles.button}>
         <Text style={styles.buttonText}>Animals</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handlePlants} style={styles.button}>
+        <Text style={styles.buttonText}>Plants</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={handleCamera} style={styles.button}>
         <Text style={styles.buttonText}>Camera </Text>
@@ -48,9 +46,6 @@ const HomeScreen = () => {
       <TouchableOpacity onPress={handleSignOut} style={styles.button}>
         <Text style={styles.buttonText}>Sign out</Text>
       </TouchableOpacity>
-        <TouchableOpacity onPress={handleDelete} style={styles.button}>
-            <Text style={styles.buttonText}>Delete account</Text>
-        </TouchableOpacity>
     </View>
   );
 };
@@ -62,6 +57,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  email: {
+    fontSize: 22,
+    color: "black",
   },
   button: {
     backgroundColor: "#0782F9",
