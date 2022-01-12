@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/core";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 // TODO: could use username also for email login since password save on ios saves username not email
 import {
   KeyboardAvoidingView,
@@ -18,17 +18,6 @@ const LoginScreen = () => {
   const [password, setPassword] = useState("");
 
   const navigation = useNavigation();
-
-  useEffect(() => {
-    // TODO: Code unsubscribe
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        navigation.replace("Home");
-      }
-    });
-
-    return unsubscribe;
-  }, []);
 
   const handleSignUp = () => {
       return (

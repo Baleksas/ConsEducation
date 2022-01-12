@@ -28,7 +28,7 @@ const CameraScreen = () => {
 
     const handlePhoto = async () => {
         const photo = await ref.current.takePictureAsync()
-        console.debug(photo)
+        console.log(photo)
     }
     return (
         <View style={styles.container}>
