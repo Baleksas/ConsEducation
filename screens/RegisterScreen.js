@@ -12,7 +12,6 @@ import {
 } from "react-native";
 import { auth } from "../firebase";
 import Login from "./LoginScreen";
-import logo from "../assets/logo1.png";
 
 const RegisterScreen = () => {
   const [email, setEmail] = useState("");
@@ -49,12 +48,11 @@ const RegisterScreen = () => {
 
   return (
     <KeyboardAvoidingView
-      style={styles.container}
-      behavior="padding"
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.container}
     >
       <View style={styles.logoContainer}>
-        <Image source={logo} style={styles.logo} />
+        <Image source={require("../assets/logo2.png")} style={styles.logo} />
       </View>
       <View style={styles.inputContainer}>
         <TextInput
@@ -125,7 +123,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   button: {
-    backgroundColor: "#0782F9",
+    backgroundColor: "#A2C23D",
     width: "100%",
     padding: 15,
     borderRadius: 10,
@@ -134,7 +132,7 @@ const styles = StyleSheet.create({
   buttonOutline: {
     backgroundColor: "white",
     marginTop: 5,
-    borderColor: "#0782F9",
+    borderColor: "#A2C23D",
     borderWidth: 2,
   },
   buttonText: {
@@ -143,16 +141,20 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   buttonOutlineText: {
-    color: "#0782F9",
+    color: "#A2C23D",
     fontWeight: "700",
     fontSize: 16,
   },
   logoContainer: {
-    marginBottom: 40,
+    marginBottom: 20,
+    width: "100%",
+    padding: 15,
   },
   logo: {
-    width: 150,
-    height: 150,
-    padding: 40,
+    width: 300,
+    height: 100,
+    alignSelf: "center",
+    resizeMode: "contain",
   },
 });
+
