@@ -41,7 +41,7 @@ const Fungi = () => {
     })
       .then((response) => response.json())
       .then((json) => {
-        console.log(json.results[0]);
+        // console.log(json.results[0]);
         json.results.forEach((element) => {
           array.push(element.primaryCommonName);
         });

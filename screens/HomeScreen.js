@@ -16,16 +16,16 @@ const HomeScreen = () => {
   };
 
   const handleGeo = () => {
-    navigation.replace("Geo");
+    navigation.navigate("Geo");
   };
   const handleAnimals = () => {
-    navigation.replace("Animals");
+    navigation.navigate("Animals");
   };
   const handlePlants = () => {
-    navigation.replace("Plants");
+    navigation.navigate("Plants");
   };
   const handleCamera = () => {
-    navigation.replace("Camera");
+    navigation.navigate("Camera");
   };
 
   return (
