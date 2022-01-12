@@ -2,6 +2,7 @@ import { useNavigation } from "@react-navigation/core";
 import React, { useEffect, useState } from "react";
 import {
   KeyboardAvoidingView,
+  Image,
   StyleSheet,
   Text,
   TextInput,
@@ -11,6 +12,7 @@ import {
 } from "react-native";
 import { auth } from "../firebase";
 import Login from "./LoginScreen";
+import logo from "../assets/logo1.png";
 
 const RegisterScreen = () => {
   const [email, setEmail] = useState("");
@@ -46,7 +48,14 @@ const RegisterScreen = () => {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior="padding"
+      style={styles.container}
+    >
+      <View style={styles.logoContainer}>
+        <Image source={logo} style={styles.logo} />
+      </View>
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
@@ -77,14 +86,9 @@ const RegisterScreen = () => {
       </View>
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          onPress={handleSignUp}
-          style={[styles.button, styles.buttonOutline]}
-        >
-          <Text style={styles.buttonOutlineText}>Register</Text>
+        <TouchableOpacity onPress={handleSignUp} style={styles.button}>
+          <Text style={styles.buttonText}>Register</Text>
         </TouchableOpacity>
-      </View>
-      <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={handleLogin}
           style={[styles.button, styles.buttonOutline]}
@@ -142,5 +146,13 @@ const styles = StyleSheet.create({
     color: "#0782F9",
     fontWeight: "700",
     fontSize: 16,
+  },
+  logoContainer: {
+    marginBottom: 40,
+  },
+  logo: {
+    width: 150,
+    height: 150,
+    padding: 40,
   },
 });
