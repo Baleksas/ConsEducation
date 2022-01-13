@@ -28,7 +28,7 @@ const Geo = () => {
   const [errorMsg, setErrorMsg] = useState(null);
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
-  const [showMap, setShowMap] = useState(false);
+  const [showMap, setShowMap] = useState(true);
   const [region, setRegion] = useState({
     latitude: 51.5079145,
     longitude: -0.0899163,
@@ -38,6 +38,15 @@ const Geo = () => {
   const navigation = useNavigation();
   const handleHome = () => {
     navigation.replace("Home");
+  };
+  const handleAnimals = () => {
+    navigation.navigate("Animals");
+  };
+  const handleCamera = () => {
+    navigation.navigate("Camera");
+  };
+  const handleSettings = () => {
+    navigation.navigate("Settings");
   };
   useEffect(() => {
     (async () => {
@@ -76,14 +85,6 @@ const Geo = () => {
   };
   return (
     <View>
-      <View style={styles.flex}>
-        <Text style={styles.locationText}>
-          Current latitude: {parseFloat(region.latitude).toFixed(2)}
-        </Text>
-        <Text style={styles.locationText}>
-          Current longitude: {parseFloat(region.longitude).toFixed(2)}
-        </Text>
-      </View>
       <View>
         <Text style={styles.locationText}>
           {location
@@ -93,14 +94,7 @@ const Geo = () => {
               `
             : "No location"}
         </Text>
-        <Text>{location && `Updated ago: ${location.timestamp / 1000}`}</Text>
         <View style={styles.flex}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => setShowMap(!showMap)}
-          >
-            <Text style={styles.buttonText}>SHOW MAP</Text>
-          </TouchableOpacity>
           {showMap && (
             <TouchableOpacity style={styles.button} onPress={handleLocation}>
               <Text style={styles.buttonText}>SHOW MY LOCATION ON THE MAP</Text>
@@ -117,7 +111,6 @@ const Geo = () => {
           onRegionChangeComplete={(region) => setRegion(region)}
           customMapStyle={map}
         >
-          <Marker coordinate={tokyoRegion} />
         </MapView>
       ) : (
         <View>
@@ -125,9 +118,21 @@ const Geo = () => {
         </View>
       )}
 
-      <View style={styles.flex}>
-        <TouchableOpacity style={styles.button} onPress={() => handleHome()}>
-          <Text style={styles.buttonText}>HOME</Text>
+      <View style={styles.buttonContainer}>
+        <View style={styles.currentButton}>
+          <Text style={styles.currentButtonText}>Map</Text>
+        </View>
+        <TouchableOpacity onPress={handleAnimals} style={styles.button}>
+          <Text style={styles.buttonText}>Animals</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleHome} style={styles.button}>
+          <Text style={styles.buttonText}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleCamera} style={styles.button}>
+          <Text style={styles.buttonText}>Camera </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleSettings} style={styles.button}>
+          <Text style={styles.buttonText}>Settings</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -140,10 +145,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     width: Dimensions.get("window").width,
   },
-
   map: {
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height * 0.7,
+    height: Dimensions.get("window").height * 0.79,
     alignSelf: "center",
     borderColor: "black",
   },
@@ -154,20 +158,49 @@ const styles = StyleSheet.create({
   },
   locationText: {
     color: "white",
-    backgroundColor: "#0782A2",
+    backgroundColor: "#788E2D",
     padding: 15,
     textAlign: "center",
+    height: 55,
+  },
+  buttonContainer: {
+    height: 50,
+    width: "100%",
+    flex: 1,
+    flexDirection: "row",
+    position: "absolute",
+    bottom: 0,
   },
   button: {
-    backgroundColor: "#0782F9",
-    width: "60%",
-    padding: 15,
-    alignItems: "center",
+    backgroundColor: "#A2C23D",
+    opacity: 0.85,
+    flex: 1,
+    height: 50,
+    padding: 5,
+    margin: 0.5,
   },
   buttonText: {
     color: "white",
     fontWeight: "700",
     fontSize: 16,
+    alignSelf: "center",
+    marginTop: 10,
+  },
+  currentButton: {
+    backgroundColor: "white",
+    borderColor: "#A2C23D",
+    borderWidth: 0.5,
+    flex: 1,
+    height: 50,
+    padding: 5,
+    margin: 0.5,
+  },
+  currentButtonText: {
+    color: "#A2C23D",
+    fontWeight: "700",
+    fontSize: 16,
+    alignSelf: "center",
+    marginTop: 10,
   },
 });
 

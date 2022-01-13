@@ -14,6 +14,7 @@ import Geo from "./screens/Geo";
 import RegisterScreen from "./screens/RegisterScreen";
 import GuestAccessScreen from "./screens/GuestAccessScreen";
 import CameraScreen from "./screens/CameraScreen";
+import SettingScreen from "./screens/SettingScreen";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -55,6 +56,7 @@ export default function App() {
           })}
         />
         <Stack.Screen name="Plants" component={Plants} />
+        <Stack.Screen name="Settings" component={SettingScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

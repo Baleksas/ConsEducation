@@ -4,7 +4,7 @@ import {
   Text,
   View,
   TouchableOpacity,
-  ScrollView,
+  ScrollView, Dimensions,
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 // const Animal = (name, rank, scName, comment, nations, isExotic, isNative) => {
@@ -35,9 +35,20 @@ const Animals = () => {
   const navigation = useNavigation();
 
   const [isLoading, setIsLoading] = useState(true);
+
+  const handleGeo = () => {
+    navigation.navigate("Geo");
+  };
   const handleHome = () => {
     navigation.navigate("Home");
   };
+  const handleCamera = () => {
+    navigation.navigate("Camera");
+  };
+  const handleSettings = () => {
+    navigation.navigate("Settings")
+  };
+
   useEffect(() => {
     fetch("https://explorer.natureserve.org/api/data/speciesSearch", {
       method: "POST",
@@ -90,60 +101,123 @@ const Animals = () => {
       });
   }, []);
   return (
-    <ScrollView>
-      {!isLoading ? (
-        <>
-          {/* <Text>{commonNames}</Text>
-          <Text>{roundedGRanks}</Text>
-          <Text>{scientificNames}</Text>
-          <Text>{taxonomicComments}</Text>
-          <Text>{JSON.stringify(nations, null, 5)}</Text> */}
-          {AnimalsArray.map((element, index) => (
-            <View key={index}>
-              {index !== 0 && <Text>{index}.</Text>}
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate("AnimalId", {
-                    ind: index,
-                    works: true,
-                    animal: AnimalsArray[index],
-                  })
-                }
-                style={styles.animalLink}
-              >
-                {index !== 0 && <Text>{element.name}</Text>}
-              </TouchableOpacity>
+      <View>
+        <ScrollView>
+          {!isLoading ? (
+            <>
+              {/* <Text>{commonNames}</Text>
+              <Text>{roundedGRanks}</Text>
+              <Text>{scientificNames}</Text>
+              <Text>{taxonomicComments}</Text>
+              <Text>{JSON.stringify(nations, null, 5)}</Text> */}
+              {AnimalsArray.map((element, index) => (
+                <View key={index}>
+                  {index !== 0 && <Text>{index}.</Text>}
+                  <TouchableOpacity
+                    onPress={() =>
+                      navigation.navigate("AnimalId", {
+                        ind: index,
+                        works: true,
+                        animal: AnimalsArray[index],
+                      })
+                    }
+                    style={styles.animalLink}
+                  >
+                    {index !== 0 && <Text>{element.name}</Text>}
+                  </TouchableOpacity>
+                </View>
+              ))}
+            </>
+          ) : (
+            // commonNames.forEach((el, index) => {
+            //     <Text>{commonNames[index]}</Text>{" "}
+            //     <Text>{roundedGRanks[index]}</Text>{" "}
+            <View style={styles.loadingContainer}>
+              <Text style={styles.loadingText}>Loading...</Text>
             </View>
-          ))}
-        </>
-      ) : (
-        // commonNames.forEach((el, index) => {
-        //     <Text>{commonNames[index]}</Text>{" "}
-        //     <Text>{roundedGRanks[index]}</Text>{" "}
-        <Text>Loading...</Text>
-      )}
-      <TouchableOpacity style={styles.button} onPress={handleHome}>
-        <Text style={styles.buttonText}>Home</Text>
-      </TouchableOpacity>
-    </ScrollView>
+          )}
+        </ScrollView>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity onPress={handleGeo} style={styles.button}>
+            <Text style={styles.buttonText}>Map</Text>
+          </TouchableOpacity>
+          <View style={styles.currentButton}>
+            <Text style={styles.currentButtonText}>Animals</Text>
+          </View>
+          <TouchableOpacity onPress={handleHome} style={styles.button}>
+            <Text style={styles.buttonText}>Home</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleCamera} style={styles.button}>
+            <Text style={styles.buttonText}>Camera </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleSettings} style={styles.button}>
+            <Text style={styles.buttonText}>Settings</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
   );
 };
 
 export default Animals;
 
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: "#0782F9",
-    width: "60%",
-    padding: 15,
-    borderRadius: 10,
+  container: {
+    flex: 1,
+    justifyContent: "center",
     alignItems: "center",
-    marginTop: 40,
+    backgroundColor: "white",
+  },
+  loadingContainer: {
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height,
+    alignSelf: "center",
+    justifyContent: "center",
+  },
+  loadingText: {
+    color: "#A2C23D",
+    fontWeight: "700",
+    fontSize: 40,
+    alignSelf: "center",
+    position: "absolute",
+  },
+  buttonContainer: {
+    height: 50,
+    width: "100%",
+    flex: 1,
+    flexDirection: "row",
+    position: "absolute",
+    bottom: 0,
+  },
+  button: {
+    backgroundColor: "#A2C23D",
+    opacity: 0.85,
+    flex: 1,
+    height: 50,
+    padding: 5,
+    margin: 0.5,
   },
   buttonText: {
     color: "white",
     fontWeight: "700",
     fontSize: 16,
+    alignSelf: "center",
+    marginTop: 10,
+  },
+  currentButton: {
+    backgroundColor: "white",
+    borderColor: "#A2C23D",
+    borderWidth: 0.5,
+    flex: 1,
+    height: 50,
+    padding: 5,
+    margin: 0.5,
+  },
+  currentButtonText: {
+    color: "#A2C23D",
+    fontWeight: "700",
+    fontSize: 16,
+    alignSelf: "center",
+    marginTop: 10,
   },
   animalLink: {
     color: "#0782F9",
