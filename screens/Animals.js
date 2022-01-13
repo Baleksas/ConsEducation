@@ -104,7 +104,7 @@ const Animals = () => {
   }, []);
   return (
       <View>
-        <ScrollView>
+        <ScrollView style={styles.animalContainer}>
           {!isLoading ? (
             <>
               {/* <Text>{commonNames}</Text>
@@ -128,6 +128,7 @@ const Animals = () => {
                     {index !== 0 && <Text>{element.name}</Text>}
                   </TouchableOpacity>
                 </View>
+
               ))}
             </>
           ) : (
@@ -171,9 +172,13 @@ const styles = StyleSheet.create({
   },
   loadingContainer: {
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
+    height: Dimensions.get("window").height * 0.88,
+    marginBottom: Dimensions.get("window").height * 0.065,
     alignSelf: "center",
     justifyContent: "center",
+  },
+  animalContainer: {
+    marginBottom: Dimensions.get("window").height * 0.065,
   },
   loadingText: {
     color: "#A2C23D",
@@ -183,7 +188,7 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   buttonContainer: {
-    height: 50,
+    height: Dimensions.get("window").height * 0.065,
     width: "100%",
     flex: 1,
     flexDirection: "row",

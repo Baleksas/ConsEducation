@@ -39,12 +39,12 @@ export default function App() {
           component={GuestAccessScreen}
         />
         <Stack.Screen
-          options={{ headerShown: false }}
+
           name="Camera"
           component={CameraScreen}
         />
         <Stack.Screen name="Geo" component={Geo} />
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen options={{ headerShown: false }} name="Home" component={HomeScreen} />
         <Stack.Screen name="Animals" component={Animals} />
         <Stack.Screen
           name="AnimalId"

@@ -14,6 +14,7 @@ import {
   View,
   Dimensions,
   Button,
+  Image,
   TouchableOpacity,
   Pressable,
 } from "react-native";
@@ -89,14 +90,17 @@ const Geo = () => {
   return (
     <View>
       <View>
-        <Text style={styles.locationText}>
-          {location
-            ? `Your location: (${JSON.stringify(
-                location.coords.latitude
-              )}, ${JSON.stringify(location.coords.longitude)})
-              `
-            : "No location"}
-        </Text>
+        <View style={styles.locationTextContainer}>
+          <Text style={styles.locationText}>
+            {location
+              ? `Your location: (${JSON.stringify(
+                  location.coords.latitude
+                )}, ${JSON.stringify(location.coords.longitude)})
+                `
+              : "No location"}
+          </Text>
+          <Image source={require("../assets/logo.png")} style={styles.logo}/>
+        </View>
         <View style={styles.flex}>
           {showMap && (
             <TouchableOpacity style={styles.button} onPress={handleLocation}>
@@ -150,7 +154,7 @@ const styles = StyleSheet.create({
   },
   map: {
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height * 0.77,
+    height: Dimensions.get("window").height * 0.79,
     alignSelf: "center",
     borderColor: "black",
   },
@@ -159,15 +163,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  locationTextContainer: {
+    backgroundColor: "#788E2D",
+    height: Dimensions.get("window").height * 0.07,
+  },
   locationText: {
     color: "white",
-    backgroundColor: "#788E2D",
     padding: 15,
-    textAlign: "center",
-    height: 55,
+    textAlign: "left",
   },
   buttonContainer: {
-    height: 50,
+    height: Dimensions.get("window").height * 0.065,
     width: "100%",
     flex: 1,
     flexDirection: "row",
@@ -204,6 +210,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     alignSelf: "center",
     marginTop: 10,
+  },
+  logo: {
+    width: Dimensions.get("window").height * 0.06,
+    height: Dimensions.get("window").height * 0.06,
+    position: "absolute",
+    right: 10,
+    top: 5,
+    resizeMode: "contain",
   },
 });
 

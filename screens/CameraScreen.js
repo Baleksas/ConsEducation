@@ -2,7 +2,7 @@
 /*jshint esversion: 8*/
 
 import React, {useState, useEffect, useRef} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, Dimensions} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, Dimensions, Image} from 'react-native';
 import { Camera } from 'expo-camera';
 import {useNavigation} from "@react-navigation/core";
 import * as Location from "expo-location";
@@ -62,7 +62,11 @@ const CameraScreen = () => {
     };
     return (
         <View style={styles.container}>
+
             <Camera style={styles.camera} type={type} flashMode={"auto"} ref={ref}>
+                <View style={styles.logoContainer}>
+                    <Image source={require("../assets/logo.png")} style={styles.logo}/>
+                </View>
                 <View style={styles.cameraButtonContainer}>
                     <TouchableOpacity
                         style={styles.cameraButton}
@@ -172,5 +176,19 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-around",
         width: Dimensions.get("window").width,
+    },
+    logoContainer: {
+        width: Dimensions.get("window").height * 0.06,
+        height: Dimensions.get("window").height * 0.06,
+        position: "absolute",
+        right: 5,
+        top: 5,
+        margin: 10,
+        marginTop: 10,
+    },
+    logo: {
+        width: Dimensions.get("window").height * 0.06,
+        height: Dimensions.get("window").height * 0.06,
+        resizeMode: "contain",
     },
 });

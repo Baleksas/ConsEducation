@@ -57,14 +57,14 @@ const styles = StyleSheet.create({
   },
   email: {
     position: "absolute",
-    top: 30,
+    top: 75,
     left: 5,
     fontSize: 22,
     color: "black",
   },
   username: {
     position: "absolute",
-    top: 5,
+    top: 50,
     left: 5,
     fontSize: 22,
     color: "black",
