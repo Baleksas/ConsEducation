@@ -12,7 +12,7 @@ import AnimalId from "./screens/AnimalId";
 
 import Plants from "./screens/Plants";
 
-import Geo from "./screens/Geo";
+import MapScreen from "./screens/MapScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import GuestAccessScreen from "./screens/GuestAccessScreen";
 import CameraScreen from "./screens/CameraScreen";
@@ -43,7 +43,7 @@ export default function App() {
           name="Camera"
           component={CameraScreen}
         />
-        <Stack.Screen name="Geo" component={Geo} />
+        <Stack.Screen name="Map" component={MapScreen} />
         <Stack.Screen options={{ headerShown: false }} name="Home" component={HomeScreen} />
         <Stack.Screen name="Animals" component={Animals} />
         <Stack.Screen

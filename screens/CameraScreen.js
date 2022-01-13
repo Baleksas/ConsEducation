@@ -45,7 +45,7 @@ const CameraScreen = () => {
     }
 
     const handleGeo = () => {
-        navigation.navigate("Geo");
+        navigation.navigate("Map");
     };
     const handleAnimals = () => {
         navigation.navigate("Animals");

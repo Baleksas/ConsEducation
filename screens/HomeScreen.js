@@ -9,7 +9,7 @@ const HomeScreen = () => {
   const navigation = useNavigation();
 
   const handleGeo = () => {
-    navigation.navigate("Geo");
+    navigation.navigate("Map");
   };
   const handleAnimals = () => {
     navigation.navigate("Animals");

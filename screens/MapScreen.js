@@ -26,7 +26,7 @@ const tokyoRegion = {
   longitudeDelta: 0.01,
 };
 
-const Geo = () => {
+const MapScreen = () => {
   const [location, setLocation] = useState(null);
   const [showLocation, setShowLocation] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
@@ -146,6 +146,8 @@ const Geo = () => {
   );
 };
 
+export default MapScreen;
+
 const styles = StyleSheet.create({
   flex: {
     flexDirection: "row",
@@ -154,7 +156,7 @@ const styles = StyleSheet.create({
   },
   map: {
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height * 0.79,
+    height: Platform.OS === "ios" ? Dimensions.get("window").height * 0.77 : Dimensions.get("window").height * 0.79,
     alignSelf: "center",
     borderColor: "black",
   },
@@ -220,5 +222,3 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
 });
-
-export default Geo;

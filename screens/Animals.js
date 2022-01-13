@@ -39,7 +39,7 @@ const Animals = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const handleGeo = () => {
-    navigation.navigate("Geo");
+    navigation.navigate("Map");
   };
   const handleHome = () => {
     navigation.navigate("Home");
