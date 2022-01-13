@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
@@ -46,7 +48,7 @@ const Animals = () => {
     navigation.navigate("Camera");
   };
   const handleSettings = () => {
-    navigation.navigate("Settings")
+    navigation.navigate("Settings");
   };
 
   useEffect(() => {

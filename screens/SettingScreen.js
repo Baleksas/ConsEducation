@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 import { useNavigation } from "@react-navigation/core";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";

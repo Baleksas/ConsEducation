@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 import { useNavigation } from "@react-navigation/core";
 import React from "react";
 import {StyleSheet, Text, TouchableOpacity, View, Image} from "react-native";
@@ -16,7 +18,7 @@ const HomeScreen = () => {
     navigation.navigate("Camera");
   };
   const handleSettings = () => {
-    navigation.navigate("Settings")
+    navigation.navigate("Settings");
   };
 
   return (

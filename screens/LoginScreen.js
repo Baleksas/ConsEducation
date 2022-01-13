@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 import { useNavigation } from "@react-navigation/core";
 import React, { useState } from "react";
 // TODO: could use username also for email login since password save on ios saves username not email
@@ -31,7 +33,7 @@ const LoginScreen = () => {
         const user = userCredentials.user;
         console.log("Logged in with:", user.email);
         if (user) {
-          navigation.replace("Home")
+          navigation.replace("Home");
         }})
         .catch((error) => alert(error.message));
   };

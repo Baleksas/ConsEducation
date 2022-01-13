@@ -1,3 +1,6 @@
+/*jshint esversion: 6 */
+/*jshint esversion: 8 */
+
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/core";
 

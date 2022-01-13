@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 import { useNavigation } from "@react-navigation/core";
 import React, { useEffect, useState } from "react";
 
@@ -13,7 +15,7 @@ import { auth } from "../firebase";
 
 const GuestAccessScreen = () => {
  // TODO: Write code for guest access screen, is currently empty
-}
+};
 
 
 export default GuestAccessScreen;

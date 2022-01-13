@@ -1,13 +1,35 @@
+/*jshint esversion: 6 */
+/*jshint esversion: 8*/
+
 import React, {useState, useEffect, useRef} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Dimensions} from 'react-native';
 import { Camera } from 'expo-camera';
 import {useNavigation} from "@react-navigation/core";
+import * as Location from "expo-location";
 
 const CameraScreen = () => {
+    const handleHome = () => {
+        navigation.replace("Home");
+    };
     const navigation = useNavigation();
     const [hasPermission, setHasPermission] = useState(null);
     const [type, setType] = useState(Camera.Constants.Type.back);
-    const ref = useRef(null)
+    const ref = useRef(null);
+    const [location, setLocation] = useState(null);
+    const [errorMsg, setErrorMsg] = useState(null);
+
+    useEffect(() => {
+        (async () => {
+            let { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== "granted") {
+                setErrorMsg("Permission to access location was denied");
+                return;
+            }
+
+            let location = await Location.getCurrentPositionAsync({});
+            setLocation(location);
+        })();
+    }, []);
 
     useEffect(() => {
         (async () => {
@@ -19,7 +41,7 @@ const CameraScreen = () => {
         return <View />;
     }
     if (hasPermission === false) {
-        return <Text>No access to camera</Text>;
+        return handleHome();
     }
 
     const handleGeo = () => {
@@ -28,17 +50,16 @@ const CameraScreen = () => {
     const handleAnimals = () => {
         navigation.navigate("Animals");
     };
-    const handleHome = () => {
-        navigation.replace("Home")
-    }
     const handleSettings = () => {
-        navigation.navigate("Settings")
+        navigation.navigate("Settings");
     };
 
     const handlePhoto = async () => {
-        const photo = await ref.current.takePictureAsync()
-        console.log(photo)
-    }
+        const photo = await ref.current.takePictureAsync();
+        console.log(photo);
+        const photo_lat = location.coords.latitude;
+        const photo_long = location.coords.longitude;
+    };
     return (
         <View style={styles.container}>
             <Camera style={styles.camera} type={type} flashMode={"auto"} ref={ref}>
