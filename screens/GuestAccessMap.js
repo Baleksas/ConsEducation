@@ -1,91 +1,91 @@
 /*jshint esversion: 6 */
 
+import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/core";
-import React, { useEffect, useState } from "react";
 
 import {
-    Dimensions,
-    Image,
-    KeyboardAvoidingView,
     StyleSheet,
     Text,
-    TextInput,
-    TouchableOpacity,
     View,
+    Dimensions,
+    Button,
+    Image,
+    TouchableOpacity,
+    Pressable,
+    Platform,
 } from "react-native";
-import { auth } from "../firebase";
 
-const GuestAccessScreen = () => {
+const GuestAccessMap = () => {
     const navigation = useNavigation();
-    const [taxonomies, setTaxonomies] = useState();
-
-    const handleGeo = () => {
-        navigation.navigate("GuestAccessMap");
-    };
     const handleHome = () => {
-        navigation.navigate("GuestAccessScreen");
+        navigation.navigate("GuestAccess");
     };
     const handleSelection = () => {
         navigation.navigate("GuestAccessSelection");
     };
-    const handleCustom = (custom) => {
-        navigation.navigate(`${custom}`);
-    };
 
     return (
         <View style={styles.container}>
-            <Text style={styles.username}>
-                Logged in as: {auth.currentUser?.username}
-            </Text>
-            <Text style={styles.email}>Email: {auth.currentUser?.email}</Text>
-            <Image source={require("../assets/logo2.png")} style={styles.logo} />
             <View style={styles.buttonContainer}>
-                <TouchableOpacity onPress={handleGeo} style={styles.button}>
-                    <Text style={styles.buttonText}>Map</Text>
-                </TouchableOpacity>
                 <View style={styles.currentButton}>
                     <Text style={styles.currentButtonText}>Home</Text>
                 </View>
+                <TouchableOpacity onPress={handleHome} style={styles.button}>
+                    <Text style={styles.buttonText}>Home</Text>
+                </TouchableOpacity>
                 <TouchableOpacity onPress={handleSelection} style={styles.button}>
-                    <Text style={styles.buttonText}>Selection</Text>
+                    <Text style={styles.buttonText}>Animals</Text>
                 </TouchableOpacity>
             </View>
         </View>
     );
 };
 
-export default GuestAccessScreen;
+export default GuestAccessMap;
 
 const styles = StyleSheet.create({
+    flex: {
+        flexDirection: "row",
+        justifyContent: "space-around",
+        width: Dimensions.get("window").width,
+    },
+    map: {
+        width: Dimensions.get("window").width,
+        height:
+            Platform.OS === "ios"
+                ? Dimensions.get("window").height * 0.77
+                : Dimensions.get("window").height * 0.79,
+        alignSelf: "center",
+        borderColor: "black",
+    },
     container: {
         flex: 1,
+        width: Dimensions.get("window").width,
+        height: Dimensions.get("window").height,
         justifyContent: "center",
         alignItems: "center",
     },
-    email: {
-        position: "absolute",
-        top: 75,
-        left: 5,
-        fontSize: 22,
-        color: "black",
+    locationTextContainer: {
+        backgroundColor: "#788E2D",
+        height: Dimensions.get("window").height * 0.07,
     },
-    username: {
-        position: "absolute",
-        top: 50,
-        left: 5,
-        fontSize: 22,
-        color: "black",
+    locationText: {
+        color: "white",
+        padding: 15,
+        textAlign: "left",
     },
     buttonContainer: {
-        height: 50,
+        height: Dimensions.get("window").height * 0.065,
         width: "100%",
         flex: 1,
         flexDirection: "row",
         position: "absolute",
+        justifyContent: "flex-end",
         bottom: 0,
     },
     button: {
         backgroundColor: "#A2C23D",
+        opacity: 0.85,
         flex: 1,
         height: 50,
         padding: 5,
@@ -114,11 +114,12 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         marginTop: 10,
     },
-
     logo: {
-        width: Dimensions.get("window").width * 0.9,
-        height: 100,
-        alignSelf: "center",
+        width: Dimensions.get("window").height * 0.06,
+        height: Dimensions.get("window").height * 0.06,
+        position: "absolute",
+        right: 10,
+        top: 5,
         resizeMode: "contain",
     },
 });
