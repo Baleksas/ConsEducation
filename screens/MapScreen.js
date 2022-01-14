@@ -40,11 +40,12 @@ const MapScreen = () => {
     latitudeDelta: 0.01,
     longitudeDelta: 0.01,
   });
+
   const navigation = useNavigation();
+
   const handleHome = () => {
     navigation.replace("Home");
   };
-
   const handleSelection = () => {
     navigation.navigate("Selection");
   };
@@ -54,6 +55,7 @@ const MapScreen = () => {
   const handleSettings = () => {
     navigation.navigate("Settings");
   };
+
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();

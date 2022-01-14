@@ -7,7 +7,7 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
-  Dimensions,
+  Dimensions, Platform,
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 const Animals = () => {
@@ -24,8 +24,23 @@ const Animals = () => {
   ]);
   const navigation = useNavigation();
 
-  const [isLoading, setIsLoading] = useState(true);
+  const handleMammals = () => {
+    navigation.navigate("Mammals");
+  };
+  const handleReptiles = () => {
+    navigation.navigate("Reptiles");
+  };
+  const handleBirds = () => {
+    navigation.navigate("Birds");
+  };
+  const handleAmphibians = () => {
+    navigation.navigate("Amphibians");
+  };
+  const handleCurrent = () => {
+    navigation.navigate("Selection");
+  };
 
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetch("https://explorer.natureserve.org/api/data/speciesSearch", {
@@ -109,6 +124,23 @@ const Animals = () => {
           </View>
         )}
       </ScrollView>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity onPress={handleMammals} style={styles.button}>
+          <Text style={styles.buttonText}>Mammals</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleReptiles} style={styles.button}>
+          <Text style={styles.buttonText}>Reptiles</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleBirds} style={styles.button}>
+          <Text style={styles.buttonText}>Birds</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleAmphibians} style={styles.button}>
+          <Text style={styles.buttonText}>Amphibians</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleCurrent} style={styles.currentButton}>
+          <Text style={styles.currentButtonText}>All</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -130,7 +162,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   animalContainer: {
-    marginBottom: Dimensions.get("window").height * 0.065,
+    marginBottom: Dimensions.get("window").height * 0.062,
   },
   loadingText: {
     color: "#A2C23D",
@@ -145,7 +177,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     position: "absolute",
-    bottom: 0,
+    top: Platform.OS === 'ios'? Dimensions.get("window").height * 0.825: Dimensions.get("window").height * 0.865,
   },
   button: {
     backgroundColor: "#A2C23D",
@@ -158,7 +190,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "white",
     fontWeight: "700",
-    fontSize: 16,
+    fontSize: 12,
     alignSelf: "center",
     marginTop: 10,
   },
@@ -174,7 +206,7 @@ const styles = StyleSheet.create({
   currentButtonText: {
     color: "#A2C23D",
     fontWeight: "700",
-    fontSize: 16,
+    fontSize: 12,
     alignSelf: "center",
     marginTop: 10,
   },
