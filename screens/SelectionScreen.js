@@ -72,13 +72,13 @@ const SelectionScreen = () => {
           <Text style={styles.buttonText}>Map</Text>
         </TouchableOpacity>
         <View style={styles.currentButton}>
-          <Text style={styles.currentButtonText}>Selection</Text>
+          <Text style={styles.currentButtonText}>Animals</Text>
         </View>
         <TouchableOpacity onPress={handleHome} style={styles.button}>
           <Text style={styles.buttonText}>Home</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleCamera} style={styles.button}>
-          <Text style={styles.buttonText}>Camera </Text>
+          <Text style={styles.buttonText}>Camera</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleSettings} style={styles.button}>
           <Text style={styles.buttonText}>Settings</Text>
@@ -99,13 +99,16 @@ const styles = StyleSheet.create({
   },
   loadingContainer: {
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height * 0.88,
+    height: Dimensions.get("window").height * 0.86,
     marginBottom: Dimensions.get("window").height * 0.065,
     alignSelf: "center",
     justifyContent: "center",
   },
   animalContainer: {
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height * 0.86,
     marginBottom: Dimensions.get("window").height * 0.065,
+    alignSelf: "center",
   },
   loadingText: {
     color: "#A2C23D",

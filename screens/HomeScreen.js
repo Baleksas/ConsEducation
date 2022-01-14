@@ -40,7 +40,7 @@ const HomeScreen = () => {
           <Text style={styles.buttonText}>Map</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleSelection} style={styles.button}>
-          <Text style={styles.buttonText}>Selection</Text>
+          <Text style={styles.buttonText}>Animals</Text>
         </TouchableOpacity>
         <View style={styles.currentButton}>
           <Text style={styles.currentButtonText}>Home</Text>

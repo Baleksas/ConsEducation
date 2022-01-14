@@ -129,13 +129,13 @@ const Animals = () => {
           <Text style={styles.buttonText}>Map</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleSelection} style={styles.button}>
-          <Text style={styles.buttonText}>Selection</Text>
+          <Text style={styles.buttonText}>Animals</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleHome} style={styles.button}>
           <Text style={styles.buttonText}>Home</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleCamera} style={styles.button}>
-          <Text style={styles.buttonText}>Camera </Text>
+          <Text style={styles.buttonText}>Camera</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleSettings} style={styles.button}>
           <Text style={styles.buttonText}>Settings</Text>

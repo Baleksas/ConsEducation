@@ -96,13 +96,13 @@ const CameraScreen = () => {
           <Text style={styles.buttonText}>Map</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleSelection} style={styles.button}>
-          <Text style={styles.buttonText}>Selection</Text>
+          <Text style={styles.buttonText}>Animals</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleHome} style={styles.button}>
           <Text style={styles.buttonText}>Home</Text>
         </TouchableOpacity>
         <View style={styles.currentButton}>
-          <Text style={styles.currentButtonText}>Camera </Text>
+          <Text style={styles.currentButtonText}>Camera</Text>
         </View>
         <TouchableOpacity onPress={handleSettings} style={styles.button}>
           <Text style={styles.buttonText}>Settings</Text>

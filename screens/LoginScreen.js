@@ -38,6 +38,12 @@ const LoginScreen = () => {
         .catch((error) => alert(error.message));
   };
 
+  const handleGuest = () => {
+    return (
+        navigation.replace("GuestAccess")
+    );
+  };
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -71,6 +77,12 @@ const LoginScreen = () => {
           style={[styles.button, styles.buttonOutline]}
         >
           <Text style={styles.buttonOutlineText}>Register</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.guestTextContainer}>
+        <Text style={styles.guestText}>Or, alternatively, you can try our </Text>
+        <TouchableOpacity onPress={handleGuest}>
+          <Text style={styles.guestLink}>Guest Access</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
@@ -125,8 +137,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   logoContainer: {
-    marginTop: 40,
-    marginBottom: 20,
+    marginTop: 60,
+    marginBottom: 10,
     width: "100%",
     padding: 15,
   },
@@ -135,5 +147,22 @@ const styles = StyleSheet.create({
     height: 100,
     alignSelf: "center",
     resizeMode: "contain",
+  },
+  guestTextContainer: {
+    marginTop: 30,
+    marginBottom: 0,
+    width: Dimensions.get("window").width * 0.8,
+    padding: 15,
+    alignItems: "center",
+  },
+  guestText: {
+    color: "grey",
+    fontWeight: "700",
+    fontSize: 16,
+  },
+  guestLink: {
+    color: "#A2C23D",
+    fontWeight: "700",
+    fontSize: 16,
   },
 });

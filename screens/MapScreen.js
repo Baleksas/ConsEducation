@@ -90,7 +90,7 @@ const MapScreen = () => {
     });
   };
   return (
-    <View>
+    <View styles={styles.container}>
       <View>
         <View style={styles.locationTextContainer}>
           <Text style={styles.locationText}>
@@ -131,13 +131,13 @@ const MapScreen = () => {
           <Text style={styles.currentButtonText}>Map</Text>
         </View>
         <TouchableOpacity onPress={handleSelection} style={styles.button}>
-          <Text style={styles.buttonText}>Selection</Text>
+          <Text style={styles.buttonText}>Animals</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleHome} style={styles.button}>
           <Text style={styles.buttonText}>Home</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleCamera} style={styles.button}>
-          <Text style={styles.buttonText}>Camera </Text>
+          <Text style={styles.buttonText}>Camera</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleSettings} style={styles.button}>
           <Text style={styles.buttonText}>Settings</Text>
