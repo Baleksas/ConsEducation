@@ -20,7 +20,7 @@
     "expo-sharing": "^10.1.0",
     "expo-splash-screen": "~0.14.1",
     "expo-status-bar": "~1.2.0",
-    "expo-updates": "~0.11.3",
+    "expo-updates": "~0.11.4",
     "firebase": "8.2.3",
     "interactive-screenshot": "^0.0.5",
     "location": "^0.0.1",
@@ -48,7 +48,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
-    "@react-navigation/core": "^6.1.0"
+    "@react-navigation/core": "^6.1.0",
+    "eslint": "^8.6.0"
   },
   "private": true,
   "name": "ConsEducationFinale",

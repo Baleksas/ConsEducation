@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
@@ -10,10 +12,11 @@ import AnimalId from "./screens/AnimalId";
 
 import Plants from "./screens/Plants";
 
-import Geo from "./screens/Geo";
+import MapScreen from "./screens/MapScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import GuestAccessScreen from "./screens/GuestAccessScreen";
 import CameraScreen from "./screens/CameraScreen";
+import SettingScreen from "./screens/SettingScreen";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -36,12 +39,12 @@ export default function App() {
           component={GuestAccessScreen}
         />
         <Stack.Screen
-          options={{ headerShown: false }}
+
           name="Camera"
           component={CameraScreen}
         />
-        <Stack.Screen name="Geo" component={Geo} />
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Map" component={MapScreen} />
+        <Stack.Screen options={{ headerShown: false }} name="Home" component={HomeScreen} />
         <Stack.Screen name="Animals" component={Animals} />
         <Stack.Screen
           name="AnimalId"
@@ -55,6 +58,7 @@ export default function App() {
           })}
         />
         <Stack.Screen name="Plants" component={Plants} />
+        <Stack.Screen name="Settings" component={SettingScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

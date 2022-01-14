@@ -1,5 +1,7 @@
+/*jshint esversion: 6 */
+
 import { useNavigation } from "@react-navigation/core";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 // TODO: could use username also for email login since password save on ios saves username not email
 import {
   KeyboardAvoidingView,
@@ -8,27 +10,15 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  View, Dimensions,
 } from "react-native";
 import { auth } from "../firebase";
-import logo from "../assets/logo1.png";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigation = useNavigation();
-
-  useEffect(() => {
-    // TODO: Code unsubscribe
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        navigation.replace("Home");
-      }
-    });
-
-    return unsubscribe;
-  }, []);
 
   const handleSignUp = () => {
       return (
@@ -42,7 +32,9 @@ const LoginScreen = () => {
       .then((userCredentials) => {
         const user = userCredentials.user;
         console.log("Logged in with:", user.email);
-        })
+        if (user) {
+          navigation.replace("Home");
+        }})
         .catch((error) => alert(error.message));
   };
 
@@ -52,7 +44,7 @@ const LoginScreen = () => {
       style={styles.container}
     >
       <View style={styles.logoContainer}>
-        <Image source={logo} style={styles.logo}/>
+        <Image source={require("../assets/logo2.png")} style={styles.logo}/>
       </View>
       <View style={styles.inputContainer}>
         <TextInput
@@ -110,7 +102,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   button: {
-    backgroundColor: "#0782F9",
+    backgroundColor: "#A2C23D",
     width: "100%",
     padding: 15,
     borderRadius: 10,
@@ -119,7 +111,7 @@ const styles = StyleSheet.create({
   buttonOutline: {
     backgroundColor: "white",
     marginTop: 5,
-    borderColor: "#0782F9",
+    borderColor: "#A2C23D",
     borderWidth: 2,
   },
   buttonText: {
@@ -128,16 +120,20 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   buttonOutlineText: {
-    color: "#0782F9",
+    color: "#A2C23D",
     fontWeight: "700",
     fontSize: 16,
   },
   logoContainer: {
-    marginBottom: 40,
+    marginTop: 40,
+    marginBottom: 20,
+    width: "100%",
+    padding: 15,
   },
   logo: {
-    width: 150,
-    height: 150,
-    padding: 40,
+    width: Dimensions.get("window").width * 0.8,
+    height: 100,
+    alignSelf: "center",
+    resizeMode: "contain",
   },
 });

@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 import { useNavigation } from "@react-navigation/core";
 import React, { useEffect, useState } from "react";
 import {
@@ -8,11 +10,10 @@ import {
   TextInput,
   TouchableOpacity,
   TouchableOpacityComponent,
-  View,
+  View, Dimensions,
 } from "react-native";
 import { auth } from "../firebase";
 import Login from "./LoginScreen";
-import logo from "../assets/logo1.png";
 
 const RegisterScreen = () => {
   const [email, setEmail] = useState("");
@@ -33,14 +34,18 @@ const RegisterScreen = () => {
   }, []);
 
   const handleSignUp = () => {
-    auth
-      // TODO: ensure password and confirm password match up
-      .createUserWithEmailAndPassword(email, password)
-      .then((userCredentials) => {
-        const user = userCredentials.user;
-        console.log("Registered with:", user.email);
-      })
-      .catch((error) => alert(error.message));
+    if (password === confirm_password) {
+      auth
+          .createUserWithEmailAndPassword(email, password)
+          .then((userCredentials) => {
+            const user = userCredentials.user;
+            console.log("Registered with:", user.email);
+          })
+          .catch((error) => alert(error.message));
+    } else {
+      alert("Passwords do not match.");
+    }
+
   };
 
   const handleLogin = () => {
@@ -49,12 +54,11 @@ const RegisterScreen = () => {
 
   return (
     <KeyboardAvoidingView
-      style={styles.container}
-      behavior="padding"
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.container}
     >
       <View style={styles.logoContainer}>
-        <Image source={logo} style={styles.logo} />
+        <Image source={require("../assets/logo2.png")} style={styles.logo} />
       </View>
       <View style={styles.inputContainer}>
         <TextInput
@@ -110,6 +114,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     width: "80%",
+    marginTop: 0,
   },
   input: {
     backgroundColor: "white",
@@ -125,7 +130,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   button: {
-    backgroundColor: "#0782F9",
+    backgroundColor: "#A2C23D",
     width: "100%",
     padding: 15,
     borderRadius: 10,
@@ -134,7 +139,7 @@ const styles = StyleSheet.create({
   buttonOutline: {
     backgroundColor: "white",
     marginTop: 5,
-    borderColor: "#0782F9",
+    borderColor: "#A2C23D",
     borderWidth: 2,
   },
   buttonText: {
@@ -143,16 +148,20 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   buttonOutlineText: {
-    color: "#0782F9",
+    color: "#A2C23D",
     fontWeight: "700",
     fontSize: 16,
   },
   logoContainer: {
-    marginBottom: 40,
+    marginTop: 40,
+    width: "100%",
+    padding: 15,
   },
   logo: {
-    width: 150,
-    height: 150,
-    padding: 40,
+    width: Dimensions.get("window").width * 0.8,
+    height: 100,
+    alignSelf: "center",
+    resizeMode: "contain",
   },
 });
+
