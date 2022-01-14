@@ -157,10 +157,7 @@ const styles = StyleSheet.create({
   },
   map: {
     width: Dimensions.get("window").width,
-    height:
-      Platform.OS === "ios"
-        ? Dimensions.get("window").height * 0.77
-        : Dimensions.get("window").height * 0.79,
+    height: Dimensions.get("window").height * 0.86,
     alignSelf: "center",
     borderColor: "black",
   },
@@ -187,7 +184,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     position: "absolute",
     justifyContent: "flex-end",
-    bottom: 0,
+    top: Dimensions.get("window").height * 0.865,
   },
   button: {
     backgroundColor: "#A2C23D",

@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   },
   animalContainer: {
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height * 0.86,
+    height: Dimensions.get("window").height * 0.862,
     marginBottom: Dimensions.get("window").height * 0.065,
     alignSelf: "center",
   },
@@ -123,11 +123,10 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     position: "absolute",
-    bottom: 0,
+    top: Dimensions.get("window").height * 0.865,
   },
   button: {
     backgroundColor: "#A2C23D",
-    opacity: 0.85,
     flex: 1,
     height: 50,
     padding: 5,

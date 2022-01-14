@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     color: "white",
   },
   buttonContainer: {
-    height: 50,
+    height: Dimensions.get("window").height * 0.065,
     width: "100%",
     flex: 1,
     flexDirection: "row",

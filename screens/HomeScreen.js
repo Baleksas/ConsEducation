@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     color: "black",
   },
   buttonContainer: {
-    height: 50,
+    height: Dimensions.get("window").height * 0.065,
     width: "100%",
     flex: 1,
     flexDirection: "row",
@@ -116,7 +116,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: 10,
   },
-
   logo: {
     width: Dimensions.get("window").width * 0.9,
     height: 100,

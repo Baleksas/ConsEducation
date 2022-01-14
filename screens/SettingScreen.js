@@ -2,7 +2,7 @@
 
 import { useNavigation } from "@react-navigation/core";
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
+import {StyleSheet, Text, TouchableOpacity, View, Image, Dimensions} from "react-native";
 import { auth } from "../firebase";
 import { Touchable } from "react-native-web";
 
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   buttonContainer: {
-    height: 50,
+    height: Dimensions.get("window").height * 0.065,
     width: "100%",
     flex: 1,
     flexDirection: "row",
