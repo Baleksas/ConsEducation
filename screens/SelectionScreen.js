@@ -7,9 +7,16 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
-  Dimensions,
+  Dimensions, Platform,
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import HomeScreen from "./HomeScreen";
+import SettingScreen from "./SettingScreen";
+import MapScreen from "./MapScreen";
+import CameraScreen from "./CameraScreen"
+
+// const Tab = createBottomTabNavigator();
 const SelectionScreen = () => {
   const navigation = useNavigation();
   const [taxonomies, setTaxonomies] = useState();
@@ -29,6 +36,8 @@ const SelectionScreen = () => {
   const handleSettings = () => {
     navigation.navigate("Settings");
   };
+
+  const MapRoute = () => <Text>Map</Text>
 
   return (
     <View>
@@ -93,6 +102,8 @@ export default SelectionScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: Dimensions.get("window").height * 0.065,
+    width: "100%",
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
@@ -123,7 +134,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     position: "absolute",
-    top: Dimensions.get("window").height * 0.865,
+    top: Platform.OS === 'ios'? Dimensions.get("window").height * 0.825: Dimensions.get("window").height*0.865,
   },
   button: {
     backgroundColor: "#A2C23D",

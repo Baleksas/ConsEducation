@@ -26,21 +26,6 @@ const Animals = () => {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  const handleGeo = () => {
-    navigation.navigate("Map");
-  };
-  const handleHome = () => {
-    navigation.navigate("Home");
-  };
-  const handleSelection = () => {
-    navigation.navigate("Selection");
-  };
-  const handleCamera = () => {
-    navigation.navigate("Camera");
-  };
-  const handleSettings = () => {
-    navigation.navigate("Settings");
-  };
 
   useEffect(() => {
     fetch("https://explorer.natureserve.org/api/data/speciesSearch", {
@@ -124,23 +109,6 @@ const Animals = () => {
           </View>
         )}
       </ScrollView>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={handleGeo} style={styles.button}>
-          <Text style={styles.buttonText}>Map</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleSelection} style={styles.button}>
-          <Text style={styles.buttonText}>Animals</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleHome} style={styles.button}>
-          <Text style={styles.buttonText}>Home</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleCamera} style={styles.button}>
-          <Text style={styles.buttonText}>Camera</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleSettings} style={styles.button}>
-          <Text style={styles.buttonText}>Settings</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };
