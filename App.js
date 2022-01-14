@@ -17,6 +17,11 @@ import RegisterScreen from "./screens/RegisterScreen";
 import GuestAccessScreen from "./screens/GuestAccessScreen";
 import CameraScreen from "./screens/CameraScreen";
 import SettingScreen from "./screens/SettingScreen";
+import SelectionScreen from "./screens/SelectionScreen";
+import Mammals from "./screens/Mammals";
+import Amphibians from "./screens/Amphibians";
+import Reptiles from "./screens/Reptiles";
+import Birds from "./screens/Birds";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -38,13 +43,13 @@ export default function App() {
           name="GuestAccess"
           component={GuestAccessScreen}
         />
-        <Stack.Screen
-
-          name="Camera"
-          component={CameraScreen}
-        />
+        <Stack.Screen name="Camera" component={CameraScreen} />
         <Stack.Screen name="Map" component={MapScreen} />
-        <Stack.Screen options={{ headerShown: false }} name="Home" component={HomeScreen} />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Home"
+          component={HomeScreen}
+        />
         <Stack.Screen name="Animals" component={Animals} />
         <Stack.Screen
           name="AnimalId"
@@ -58,7 +63,12 @@ export default function App() {
           })}
         />
         <Stack.Screen name="Plants" component={Plants} />
-        <Stack.Screen name="Settings" component={SettingScreen}/>
+        <Stack.Screen name="Settings" component={SettingScreen} />
+        <Stack.Screen name="Selection" component={SelectionScreen} />
+        <Stack.Screen name="Mammals" component={Mammals} />
+        <Stack.Screen name="Amphibians" component={Amphibians} />
+        <Stack.Screen name="Birds" component={Birds} />
+        <Stack.Screen name="Reptiles" component={Reptiles} />
       </Stack.Navigator>
     </NavigationContainer>
   );

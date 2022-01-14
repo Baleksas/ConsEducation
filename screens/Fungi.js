@@ -43,11 +43,9 @@ const Fungi = () => {
     })
       .then((response) => response.json())
       .then((json) => {
-        // console.log(json.results[0]);
         json.results.forEach((element) => {
           array.push(element.primaryCommonName);
         });
-        // setAnimalsList(JSON.stringify(json.results, null, 10));
         setAnimalsList(array);
         setIsLoading(false);
         return json;

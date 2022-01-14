@@ -17,7 +17,7 @@ import {
   Image,
   TouchableOpacity,
   Pressable,
-  Platform
+  Platform,
 } from "react-native";
 
 const tokyoRegion = {
@@ -44,8 +44,9 @@ const MapScreen = () => {
   const handleHome = () => {
     navigation.replace("Home");
   };
-  const handleAnimals = () => {
-    navigation.navigate("Animals");
+
+  const handleSelection = () => {
+    navigation.navigate("Selection");
   };
   const handleCamera = () => {
     navigation.navigate("Camera");
@@ -94,13 +95,13 @@ const MapScreen = () => {
         <View style={styles.locationTextContainer}>
           <Text style={styles.locationText}>
             {location
-              ? `Your location: (${
-                  location.coords.latitude.toFixed(4)
-                }, ${location.coords.longitude.toFixed(4)})
+              ? `Your location: (${location.coords.latitude.toFixed(
+                  4
+                )}, ${location.coords.longitude.toFixed(4)})
                 `
               : "No location"}
           </Text>
-          <Image source={require("../assets/logo.png")} style={styles.logo}/>
+          <Image source={require("../assets/logo.png")} style={styles.logo} />
         </View>
         <View style={styles.flex}>
           {showMap && (
@@ -118,8 +119,7 @@ const MapScreen = () => {
           style={styles.map}
           onRegionChangeComplete={(region) => setRegion(region)}
           customMapStyle={map}
-        >
-        </MapView>
+        ></MapView>
       ) : (
         <View>
           <Text>No map</Text>
@@ -127,12 +127,11 @@ const MapScreen = () => {
       )}
 
       <View style={styles.buttonContainer}>
-        // TODO: GET THIS TO STICK TO THE BOTTOM OF THE PAGE
         <View style={styles.currentButton}>
           <Text style={styles.currentButtonText}>Map</Text>
         </View>
-        <TouchableOpacity onPress={handleAnimals} style={styles.button}>
-          <Text style={styles.buttonText}>Animals</Text>
+        <TouchableOpacity onPress={handleSelection} style={styles.button}>
+          <Text style={styles.buttonText}>Selection</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleHome} style={styles.button}>
           <Text style={styles.buttonText}>Home</Text>
@@ -158,7 +157,10 @@ const styles = StyleSheet.create({
   },
   map: {
     width: Dimensions.get("window").width,
-    height: Platform.OS === "ios" ? Dimensions.get("window").height * 0.77 : Dimensions.get("window").height * 0.79,
+    height:
+      Platform.OS === "ios"
+        ? Dimensions.get("window").height * 0.77
+        : Dimensions.get("window").height * 0.79,
     alignSelf: "center",
     borderColor: "black",
   },

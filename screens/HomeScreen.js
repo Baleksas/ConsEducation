@@ -2,7 +2,14 @@
 
 import { useNavigation } from "@react-navigation/core";
 import React from "react";
-import {StyleSheet, Text, TouchableOpacity, View, Image, Dimensions} from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Image,
+  Dimensions,
+} from "react-native";
 import { auth } from "../firebase";
 
 const HomeScreen = () => {
@@ -11,8 +18,8 @@ const HomeScreen = () => {
   const handleGeo = () => {
     navigation.navigate("Map");
   };
-  const handleAnimals = () => {
-    navigation.navigate("Animals");
+  const handleSelection = () => {
+    navigation.navigate("Selection");
   };
   const handleCamera = () => {
     navigation.navigate("Camera");
@@ -23,25 +30,27 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.username}>Logged in as: {auth.currentUser?.username}</Text>
+      <Text style={styles.username}>
+        Logged in as: {auth.currentUser?.username}
+      </Text>
       <Text style={styles.email}>Email: {auth.currentUser?.email}</Text>
-      <Image source={require("../assets/logo2.png")} style={styles.logo}/>
+      <Image source={require("../assets/logo2.png")} style={styles.logo} />
       <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={handleGeo} style={styles.button}>
-              <Text style={styles.buttonText}>Map</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleAnimals} style={styles.button}>
-              <Text style={styles.buttonText}>Animals</Text>
-          </TouchableOpacity>
-          <View style={styles.currentButton}>
-              <Text style={styles.currentButtonText}>Home</Text>
-          </View>
-          <TouchableOpacity onPress={handleCamera} style={styles.button}>
-              <Text style={styles.buttonText}>Camera</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleSettings} style={styles.button}>
-              <Text style={styles.buttonText}>Settings</Text>
-          </TouchableOpacity>
+        <TouchableOpacity onPress={handleGeo} style={styles.button}>
+          <Text style={styles.buttonText}>Map</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleSelection} style={styles.button}>
+          <Text style={styles.buttonText}>Selection</Text>
+        </TouchableOpacity>
+        <View style={styles.currentButton}>
+          <Text style={styles.currentButtonText}>Home</Text>
+        </View>
+        <TouchableOpacity onPress={handleCamera} style={styles.button}>
+          <Text style={styles.buttonText}>Camera</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleSettings} style={styles.button}>
+          <Text style={styles.buttonText}>Settings</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -98,7 +107,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 50,
     padding: 5,
-      margin: 0.5,
+    margin: 0.5,
   },
   currentButtonText: {
     color: "#A2C23D",
@@ -109,9 +118,9 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-      width: Dimensions.get("window").width * 0.90,
-      height: 100,
-      alignSelf: "center",
-      resizeMode: "contain",
+    width: Dimensions.get("window").width * 0.9,
+    height: 100,
+    alignSelf: "center",
+    resizeMode: "contain",
   },
 });

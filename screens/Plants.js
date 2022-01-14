@@ -43,10 +43,7 @@ const Plants = () => {
     })
       .then((response) => response.json())
       .then((json) => {
-        // console.log(json[0].subnodes);
         json[0].subnodes.map((element) => array.push(element.name));
-        // setAnimalsList(JSON.stringify(array));
-        // console.log(animalsList);
         setIsLoading(false);
         return json;
       })

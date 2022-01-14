@@ -1,5 +1,3 @@
-/*jshint esversion: 6 */
-// All animals
 import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
@@ -10,7 +8,11 @@ import {
   Dimensions,
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
-const Animals = () => {
+
+const Mammals = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const navigation = useNavigation();
+
   const [AnimalsArray, setAnimalsArray] = useState([
     {
       name: "",
@@ -22,26 +24,6 @@ const Animals = () => {
       isNative: false,
     },
   ]);
-  const navigation = useNavigation();
-
-  const [isLoading, setIsLoading] = useState(true);
-
-  const handleGeo = () => {
-    navigation.navigate("Map");
-  };
-  const handleHome = () => {
-    navigation.navigate("Home");
-  };
-  const handleSelection = () => {
-    navigation.navigate("Selection");
-  };
-  const handleCamera = () => {
-    navigation.navigate("Camera");
-  };
-  const handleSettings = () => {
-    navigation.navigate("Settings");
-  };
-
   useEffect(() => {
     fetch("https://explorer.natureserve.org/api/data/speciesSearch", {
       method: "POST",
@@ -62,13 +44,17 @@ const Animals = () => {
         modifiedSince: null,
         locationOptions: null,
         classificationOptions: null,
-        speciesTaxonomyCriteria: [],
+        speciesTaxonomyCriteria: [
+          {
+            paramType: "informalTaxonomy",
+            informalTaxonomy: "Mammals",
+          },
+        ],
       }),
     })
       .then((response) => response.json())
       .then((json) => {
         json.results.forEach((element) => {
-          console.log(element);
           setAnimalsArray((AnimalsArray) => [
             ...AnimalsArray,
             {
@@ -94,7 +80,6 @@ const Animals = () => {
         console.error(error);
       });
   }, []);
-
   return (
     <View>
       <ScrollView style={styles.animalContainer}>
@@ -124,93 +109,10 @@ const Animals = () => {
           </View>
         )}
       </ScrollView>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={handleGeo} style={styles.button}>
-          <Text style={styles.buttonText}>Map</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleSelection} style={styles.button}>
-          <Text style={styles.buttonText}>Selection</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleHome} style={styles.button}>
-          <Text style={styles.buttonText}>Home</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleCamera} style={styles.button}>
-          <Text style={styles.buttonText}>Camera </Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleSettings} style={styles.button}>
-          <Text style={styles.buttonText}>Settings</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };
 
-export default Animals;
+export default Mammals;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "white",
-  },
-  loadingContainer: {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height * 0.88,
-    marginBottom: Dimensions.get("window").height * 0.065,
-    alignSelf: "center",
-    justifyContent: "center",
-  },
-  animalContainer: {
-    marginBottom: Dimensions.get("window").height * 0.065,
-  },
-  loadingText: {
-    color: "#A2C23D",
-    fontWeight: "700",
-    fontSize: 40,
-    alignSelf: "center",
-    position: "absolute",
-  },
-  buttonContainer: {
-    height: Dimensions.get("window").height * 0.065,
-    width: "100%",
-    flex: 1,
-    flexDirection: "row",
-    position: "absolute",
-    bottom: 0,
-  },
-  button: {
-    backgroundColor: "#A2C23D",
-    opacity: 0.85,
-    flex: 1,
-    height: 50,
-    padding: 5,
-    margin: 0.5,
-  },
-  buttonText: {
-    color: "white",
-    fontWeight: "700",
-    fontSize: 16,
-    alignSelf: "center",
-    marginTop: 10,
-  },
-  currentButton: {
-    backgroundColor: "white",
-    borderColor: "#A2C23D",
-    borderWidth: 0.5,
-    flex: 1,
-    height: 50,
-    padding: 5,
-    margin: 0.5,
-  },
-  currentButtonText: {
-    color: "#A2C23D",
-    fontWeight: "700",
-    fontSize: 16,
-    alignSelf: "center",
-    marginTop: 10,
-  },
-  animalLink: {
-    color: "#0782F9",
-  },
-});
+const styles = StyleSheet.create({});
