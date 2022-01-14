@@ -10,7 +10,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  View, Dimensions,
 } from "react-native";
 import { auth } from "../firebase";
 
@@ -125,12 +125,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   logoContainer: {
+    marginTop: 40,
     marginBottom: 20,
     width: "100%",
     padding: 15,
   },
   logo: {
-    width: 300,
+    width: Dimensions.get("window").width * 0.8,
     height: 100,
     alignSelf: "center",
     resizeMode: "contain",

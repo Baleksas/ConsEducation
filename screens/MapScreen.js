@@ -17,6 +17,7 @@ import {
   Image,
   TouchableOpacity,
   Pressable,
+  Platform
 } from "react-native";
 
 const tokyoRegion = {
@@ -93,9 +94,9 @@ const MapScreen = () => {
         <View style={styles.locationTextContainer}>
           <Text style={styles.locationText}>
             {location
-              ? `Your location: (${JSON.stringify(
-                  location.coords.latitude
-                )}, ${JSON.stringify(location.coords.longitude)})
+              ? `Your location: (${
+                  location.coords.latitude.toFixed(4)
+                }, ${location.coords.longitude.toFixed(4)})
                 `
               : "No location"}
           </Text>
@@ -126,6 +127,7 @@ const MapScreen = () => {
       )}
 
       <View style={styles.buttonContainer}>
+        // TODO: GET THIS TO STICK TO THE BOTTOM OF THE PAGE
         <View style={styles.currentButton}>
           <Text style={styles.currentButtonText}>Map</Text>
         </View>
@@ -162,6 +164,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -180,6 +184,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     position: "absolute",
+    justifyContent: "flex-end",
     bottom: 0,
   },
   button: {

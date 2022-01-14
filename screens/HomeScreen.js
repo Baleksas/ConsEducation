@@ -2,7 +2,7 @@
 
 import { useNavigation } from "@react-navigation/core";
 import React from "react";
-import {StyleSheet, Text, TouchableOpacity, View, Image} from "react-native";
+import {StyleSheet, Text, TouchableOpacity, View, Image, Dimensions} from "react-native";
 import { auth } from "../firebase";
 
 const HomeScreen = () => {
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-      width: 375,
+      width: Dimensions.get("window").width * 0.90,
       height: 100,
       alignSelf: "center",
       resizeMode: "contain",

@@ -10,7 +10,7 @@ import {
   TextInput,
   TouchableOpacity,
   TouchableOpacityComponent,
-  View,
+  View, Dimensions,
 } from "react-native";
 import { auth } from "../firebase";
 import Login from "./LoginScreen";
@@ -34,14 +34,18 @@ const RegisterScreen = () => {
   }, []);
 
   const handleSignUp = () => {
-    auth
-      // TODO: ensure password and confirm password match up
-      .createUserWithEmailAndPassword(email, password)
-      .then((userCredentials) => {
-        const user = userCredentials.user;
-        console.log("Registered with:", user.email);
-      })
-      .catch((error) => alert(error.message));
+    if (password === confirm_password) {
+      auth
+          .createUserWithEmailAndPassword(email, password)
+          .then((userCredentials) => {
+            const user = userCredentials.user;
+            console.log("Registered with:", user.email);
+          })
+          .catch((error) => alert(error.message));
+    } else {
+      alert("Passwords do not match.");
+    }
+
   };
 
   const handleLogin = () => {
@@ -110,6 +114,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     width: "80%",
+    marginTop: 0,
   },
   input: {
     backgroundColor: "white",
@@ -148,12 +153,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   logoContainer: {
-    marginBottom: 20,
+    marginTop: 40,
     width: "100%",
     padding: 15,
   },
   logo: {
-    width: 300,
+    width: Dimensions.get("window").width * 0.8,
     height: 100,
     alignSelf: "center",
     resizeMode: "contain",
