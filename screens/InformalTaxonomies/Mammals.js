@@ -38,7 +38,7 @@ const Mammals = () => {
         locationCriteria: [],
         pagingOptions: {
           page: null,
-          recordsPerPage: 300,
+          recordsPerPage: 10000,
         },
         recordSubtypeCriteria: [],
         modifiedSince: null,
@@ -73,7 +73,6 @@ const Mammals = () => {
           ]);
         });
         setIsLoading(false);
-        console.log(json);
         return json;
       })
       .catch((error) => {
@@ -115,4 +114,70 @@ const Mammals = () => {
 
 export default Mammals;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "white",
+  },
+  loadingContainer: {
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height * 0.88,
+    marginBottom: Dimensions.get("window").height * 0.065,
+    alignSelf: "center",
+    justifyContent: "center",
+  },
+  animalContainer: {
+    marginBottom: Dimensions.get("window").height * 0.065,
+  },
+  loadingText: {
+    color: "#A2C23D",
+    fontWeight: "700",
+    fontSize: 40,
+    alignSelf: "center",
+    position: "absolute",
+  },
+  buttonContainer: {
+    height: Dimensions.get("window").height * 0.065,
+    width: "100%",
+    flex: 1,
+    flexDirection: "row",
+    position: "absolute",
+    bottom: 0,
+  },
+  button: {
+    backgroundColor: "#A2C23D",
+    opacity: 0.85,
+    flex: 1,
+    height: 50,
+    padding: 5,
+    margin: 0.5,
+  },
+  buttonText: {
+    color: "white",
+    fontWeight: "700",
+    fontSize: 16,
+    alignSelf: "center",
+    marginTop: 10,
+  },
+  currentButton: {
+    backgroundColor: "white",
+    borderColor: "#A2C23D",
+    borderWidth: 0.5,
+    flex: 1,
+    height: 50,
+    padding: 5,
+    margin: 0.5,
+  },
+  currentButtonText: {
+    color: "#A2C23D",
+    fontWeight: "700",
+    fontSize: 16,
+    alignSelf: "center",
+    marginTop: 10,
+  },
+  animalLink: {
+    color: "#0782F9",
+  },
+});

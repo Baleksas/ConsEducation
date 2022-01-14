@@ -18,10 +18,10 @@ import GuestAccessScreen from "./screens/GuestAccessScreen";
 import CameraScreen from "./screens/CameraScreen";
 import SettingScreen from "./screens/SettingScreen";
 import SelectionScreen from "./screens/SelectionScreen";
-import Mammals from "./screens/Mammals";
-import Amphibians from "./screens/Amphibians";
-import Reptiles from "./screens/Reptiles";
-import Birds from "./screens/Birds";
+import Mammals from "./screens/InformalTaxonomies/Mammals";
+import Amphibians from "./screens/InformalTaxonomies/Amphibians";
+import Reptiles from "./screens/InformalTaxonomies/Reptiles";
+import Birds from "./screens/InformalTaxonomies/Birds";
 const Stack = createNativeStackNavigator();
 
 export default function App() {

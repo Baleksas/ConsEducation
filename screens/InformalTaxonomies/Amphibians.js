@@ -1,5 +1,3 @@
-/*jshint esversion: 6 */
-// All animals
 import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
@@ -10,7 +8,11 @@ import {
   Dimensions,
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
-const Animals = () => {
+
+const Amphibians = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const navigation = useNavigation();
+
   const [AnimalsArray, setAnimalsArray] = useState([
     {
       name: "",
@@ -22,26 +24,6 @@ const Animals = () => {
       isNative: false,
     },
   ]);
-  const navigation = useNavigation();
-
-  const [isLoading, setIsLoading] = useState(true);
-
-  const handleGeo = () => {
-    navigation.navigate("Map");
-  };
-  const handleHome = () => {
-    navigation.navigate("Home");
-  };
-  const handleSelection = () => {
-    navigation.navigate("Selection");
-  };
-  const handleCamera = () => {
-    navigation.navigate("Camera");
-  };
-  const handleSettings = () => {
-    navigation.navigate("Settings");
-  };
-
   useEffect(() => {
     fetch("https://explorer.natureserve.org/api/data/speciesSearch", {
       method: "POST",
@@ -62,13 +44,17 @@ const Animals = () => {
         modifiedSince: null,
         locationOptions: null,
         classificationOptions: null,
-        speciesTaxonomyCriteria: [],
+        speciesTaxonomyCriteria: [
+          {
+            paramType: "informalTaxonomy",
+            informalTaxonomy: "Amphibians",
+          },
+        ],
       }),
     })
       .then((response) => response.json())
       .then((json) => {
         json.results.forEach((element) => {
-          console.log(element);
           setAnimalsArray((AnimalsArray) => [
             ...AnimalsArray,
             {
@@ -87,14 +73,12 @@ const Animals = () => {
           ]);
         });
         setIsLoading(false);
-        console.log(json);
         return json;
       })
       .catch((error) => {
         console.error(error);
       });
   }, []);
-
   return (
     <View>
       <ScrollView style={styles.animalContainer}>
@@ -124,28 +108,11 @@ const Animals = () => {
           </View>
         )}
       </ScrollView>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={handleGeo} style={styles.button}>
-          <Text style={styles.buttonText}>Map</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleSelection} style={styles.button}>
-          <Text style={styles.buttonText}>Selection</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleHome} style={styles.button}>
-          <Text style={styles.buttonText}>Home</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleCamera} style={styles.button}>
-          <Text style={styles.buttonText}>Camera </Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleSettings} style={styles.button}>
-          <Text style={styles.buttonText}>Settings</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };
 
-export default Animals;
+export default Amphibians;
 
 const styles = StyleSheet.create({
   container: {
