@@ -26,9 +26,6 @@ const Amphibians = () => {
   const handleAll = () => {
     navigation.navigate("Animals");
   };
-  const handleCurrent = () => {
-    navigation.navigate("Selection");
-  };
 
   const [AnimalsArray, setAnimalsArray] = useState([
     {
@@ -136,9 +133,9 @@ const Amphibians = () => {
         <TouchableOpacity onPress={handleBirds} style={styles.button}>
           <Text style={styles.buttonText}>Birds</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={handleCurrent} style={styles.currentButton}>
+        <View style={styles.currentButton}>
           <Text style={styles.currentButtonText}>Amphibians</Text>
-        </TouchableOpacity>
+        </View>
         <TouchableOpacity onPress={handleAll} style={styles.button}>
           <Text style={styles.buttonText}>All</Text>
         </TouchableOpacity>

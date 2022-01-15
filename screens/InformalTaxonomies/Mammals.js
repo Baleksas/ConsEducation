@@ -27,9 +27,6 @@ const Mammals = () => {
   const handleAmphibians = () => {
     navigation.navigate("Amphibians");
   };
-  const handleCurrent = () => {
-    navigation.navigate("Selection");
-  };
 
   const [AnimalsArray, setAnimalsArray] = useState([
     {
@@ -128,9 +125,9 @@ const Mammals = () => {
       </ScrollView>
       <Image source={require("../../assets/logo.png")} style={styles.logo}/>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={handleCurrent} style={styles.currentButton}>
+        <View style={styles.currentButton}>
           <Text style={styles.currentButtonText}>Mammals</Text>
-        </TouchableOpacity>
+        </View>
         <TouchableOpacity onPress={handleReptiles} style={styles.button}>
           <Text style={styles.buttonText}>Reptiles</Text>
         </TouchableOpacity>

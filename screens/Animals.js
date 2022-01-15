@@ -36,9 +36,6 @@ const Animals = () => {
   const handleAmphibians = () => {
     navigation.navigate("Amphibians");
   };
-  const handleCurrent = () => {
-    navigation.navigate("Selection");
-  };
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -138,9 +135,9 @@ const Animals = () => {
         <TouchableOpacity onPress={handleAmphibians} style={styles.button}>
           <Text style={styles.buttonText}>Amphibians</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={handleCurrent} style={styles.currentButton}>
+        <View style={styles.currentButton}>
           <Text style={styles.currentButtonText}>All</Text>
-        </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

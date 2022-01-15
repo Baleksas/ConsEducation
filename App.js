@@ -51,7 +51,6 @@ export default function App() {
             component={GuestAccessMap}
         />
         <Stack.Screen
-            options={{ headerShown: false }}
             name="GuestAccessSelection"
             component={GuestAccessSelection}
         />

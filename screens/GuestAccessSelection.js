@@ -8,7 +8,7 @@ import {
     View,
     TouchableOpacity,
     ScrollView,
-    Dimensions,
+    Dimensions, Image,
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 const SelectionScreen = () => {
@@ -27,37 +27,38 @@ const SelectionScreen = () => {
 
     return (
         <View>
+            <Image source={require("../assets/logo.png")} style={styles.logo} />
             <ScrollView style={styles.animalContainer}>
-                <View>
+                <View style={styles.animalButtonContainer}>
                     <TouchableOpacity
-                        style={styles.button}
+                        style={styles.animalButton1}
                         onPress={() => handleCustom("Mammals")}
                     >
-                        <Text style={styles.buttonText}>Mammals</Text>
+                        <Text style={styles.animalButton1Text}>Mammals</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={styles.button}
+                        style={styles.animalButton2}
                         onPress={() => handleCustom("Reptiles")}
                     >
-                        <Text style={styles.buttonText}>Reptiles</Text>
+                        <Text style={styles.animalButton2Text}>Reptiles</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={styles.button}
+                        style={styles.animalButton1}
                         onPress={() => handleCustom("Birds")}
                     >
-                        <Text style={styles.buttonText}>Birds</Text>
+                        <Text style={styles.animalButton1Text}>Birds</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={styles.button}
+                        style={styles.animalButton2}
                         onPress={() => handleCustom("Amphibians")}
                     >
-                        <Text style={styles.buttonText}>Amphibians</Text>
+                        <Text style={styles.animalButton2Text}>Amphibians</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={styles.button}
+                        style={styles.animalButton1}
                         onPress={() => handleCustom("Animals")}
                     >
-                        <Text style={styles.buttonText}>All animals</Text>
+                        <Text style={styles.animalButton1Text}>All animals</Text>
                     </TouchableOpacity>
                     {/* {} */}
                 </View>
@@ -82,19 +83,63 @@ export default SelectionScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        height: Dimensions.get("window").height * 0.065,
+        width: "100%",
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "white",
     },
     loadingContainer: {
         width: Dimensions.get("window").width,
-        height: Dimensions.get("window").height * 0.88,
+        height: Dimensions.get("window").height * 0.86,
         marginBottom: Dimensions.get("window").height * 0.065,
         alignSelf: "center",
         justifyContent: "center",
     },
     animalContainer: {
+        width: Dimensions.get("window").width,
+        height: Dimensions.get("window").height * 0.862,
         marginBottom: Dimensions.get("window").height * 0.065,
+        alignSelf: "center",
+    },
+    animalButtonContainer: {
+        width: Dimensions.get("window").width * 0.8,
+        height: Dimensions.get("window").height * 0.7,
+        flex: 1,
+        alignSelf: "center",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 80,
+    },
+    animalButton1: {
+        backgroundColor: "#A2C23D",
+        width: "100%",
+        height: Dimensions.get("window").height * 0.1,
+        padding: 15,
+        borderRadius: 10,
+        alignItems: "center",
+        marginTop: 25,
+    },
+    animalButton2: {
+        backgroundColor: "white",
+        borderColor: "#A2C23D",
+        borderWidth: 2,
+        width: "100%",
+        height: Dimensions.get("window").height * 0.1,
+        padding: 15,
+        borderRadius: 10,
+        alignItems: "center",
+        marginTop: 28,
+    },
+    animalButton1Text: {
+        color: "white",
+        fontWeight: "700",
+        fontSize: 28,
+    },
+    animalButton2Text: {
+        color: "#A2C23D",
+        fontWeight: "700",
+        fontSize: 25,
     },
     loadingText: {
         color: "#A2C23D",
@@ -144,5 +189,13 @@ const styles = StyleSheet.create({
     },
     animalLink: {
         color: "#0782F9",
+    },
+    logo: {
+        width: Dimensions.get("window").height * 0.06,
+        height: Dimensions.get("window").height * 0.06,
+        position: "absolute",
+        right: 10,
+        top: 10,
+        resizeMode: "contain",
     },
 });

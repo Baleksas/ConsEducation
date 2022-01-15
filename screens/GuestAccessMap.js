@@ -28,7 +28,7 @@ const GuestAccessMap = () => {
         <View style={styles.container}>
             <View style={styles.buttonContainer}>
                 <View style={styles.currentButton}>
-                    <Text style={styles.currentButtonText}>Home</Text>
+                    <Text style={styles.currentButtonText}>Map</Text>
                 </View>
                 <TouchableOpacity onPress={handleHome} style={styles.button}>
                     <Text style={styles.buttonText}>Home</Text>
