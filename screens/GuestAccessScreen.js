@@ -28,17 +28,26 @@ const GuestAccessScreen = () => {
     const handleSelection = () => {
         navigation.navigate("GuestAccessSelection");
     };
-    const handleCustom = (custom) => {
-        navigation.navigate(`${custom}`);
+    const handleLogin = () => {
+      navigation.navigate("Login");
+    };
+    const handleRegister = () => {
+      navigation.navigate("Register");
     };
 
     return (
         <View style={styles.container}>
-            <Text style={styles.username}>
-                Logged in as: {auth.currentUser?.username}
-            </Text>
-            <Text style={styles.email}>Email: {auth.currentUser?.email}</Text>
             <Image source={require("../assets/logo2.png")} style={styles.logo} />
+            <View style={styles.loginTextContainer}>
+                <Text style={styles.loginText}>To access the full features of the app, please</Text>
+                <TouchableOpacity onPress={handleLogin}>
+                    <Text style={styles.loginLink}>Login</Text>
+                </TouchableOpacity>
+                <Text style={styles.loginText}>or</Text>
+                <TouchableOpacity onPress={handleRegister}>
+                    <Text style={styles.loginLink}>Register</Text>
+                </TouchableOpacity>
+            </View>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity onPress={handleGeo} style={styles.button}>
                     <Text style={styles.buttonText}>Map</Text>
@@ -114,11 +123,30 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         marginTop: 10,
     },
-
     logo: {
-        width: Dimensions.get("window").width * 0.9,
+        width: Dimensions.get("window").width * 0.92,
         height: 100,
         alignSelf: "center",
         resizeMode: "contain",
+    },
+    loginTextContainer: {
+        marginTop: 40,
+        marginBottom: 0,
+        bottom: 140,
+        position: "absolute",
+        width: Dimensions.get("window").width * 0.98,
+        padding: 15,
+        alignItems: "center",
+    },
+    loginText: {
+        color: "grey",
+        fontWeight: "700",
+        fontSize: 16,
+    },
+    loginLink: {
+        color: "#A2C23D",
+        fontWeight: "700",
+        fontSize: 18,
+        margin: 10,
     },
 });
