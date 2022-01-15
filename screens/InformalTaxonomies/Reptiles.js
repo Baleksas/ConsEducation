@@ -5,7 +5,7 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
-  Dimensions, Platform,
+  Dimensions, Platform, Image,
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 
@@ -102,8 +102,8 @@ const Reptiles = () => {
         {!isLoading ? (
           <>
             {AnimalsArray.map((element, index) => (
-              <View key={index}>
-                {index !== 0 && <Text>{index}.</Text>}
+              <View key={index} style={styles.animalTextContainer}>
+                {index !== 0 && <Text style={styles.animalIndex}>{index}.</Text>}
                 <TouchableOpacity
                   onPress={() =>
                     navigation.navigate("AnimalId", {
@@ -114,7 +114,7 @@ const Reptiles = () => {
                   }
                   style={styles.animalLink}
                 >
-                  {index !== 0 && <Text>{element.name}</Text>}
+                  {index !== 0 && <Text style={styles.animalText}>{element.name}</Text>}
                 </TouchableOpacity>
               </View>
             ))}
@@ -125,6 +125,7 @@ const Reptiles = () => {
           </View>
         )}
       </ScrollView>
+      <Image source={require("../../assets/logo.png")} style={styles.logo}/>
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={handleMammals} style={styles.button}>
           <Text style={styles.buttonText}>Mammals</Text>
@@ -157,13 +158,41 @@ const styles = StyleSheet.create({
   },
   loadingContainer: {
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height * 0.88,
+    height: Dimensions.get("window").height * 0.7,
     marginBottom: Dimensions.get("window").height * 0.065,
     alignSelf: "center",
     justifyContent: "center",
   },
   animalContainer: {
     marginBottom: Dimensions.get("window").height * 0.062,
+  },
+  animalText: {
+    fontSize: 15,
+    marginLeft: 75,
+    bottom: 17,
+    color: "#788E2D",
+    position: "absolute",
+    fontWeight: "700",
+    alignSelf: "center",
+    flexWrap: "wrap",
+  },
+  animalTextContainer: {
+    width: Dimensions.get("window").width * 0.95,
+    height: 52,
+    backgroundColor: "white",
+    borderColor: "#788E2D",
+    borderWidth: 2,
+    borderRadius: 10,
+    marginBottom: 5,
+    alignSelf: "center",
+  },
+  animalIndex: {
+    fontSize: 15,
+    fontWeight: "700",
+    bottom: 7,
+    marginLeft: 5,
+    color: "#788E2D",
+    position: "absolute",
   },
   loadingText: {
     color: "#A2C23D",
@@ -213,5 +242,13 @@ const styles = StyleSheet.create({
   },
   animalLink: {
     color: "#0782F9",
+  },
+  logo: {
+    width: Dimensions.get("window").height * 0.06,
+    height: Dimensions.get("window").height * 0.06,
+    position: "absolute",
+    right: 10,
+    top: 10,
+    resizeMode: "contain",
   },
 });
