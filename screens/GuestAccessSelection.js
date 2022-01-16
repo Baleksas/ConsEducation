@@ -8,7 +8,7 @@ import {
     View,
     TouchableOpacity,
     ScrollView,
-    Dimensions, Image, Platform,
+    Dimensions, Image, Platform
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 const SelectionScreen = () => {
@@ -28,7 +28,7 @@ const SelectionScreen = () => {
     return (
         <View>
             <Image source={require("../assets/logo.png")} style={styles.logo} />
-            <ScrollView style={styles.animalContainer}>
+            <View style={styles.animalContainer}>
                 <View style={styles.animalButtonContainer}>
                     <TouchableOpacity
                         style={styles.animalButton1}
@@ -62,7 +62,7 @@ const SelectionScreen = () => {
                     </TouchableOpacity>
                     {/* {} */}
                 </View>
-            </ScrollView>
+            </View>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity onPress={handleGeo} style={styles.button}>
                     <Text style={styles.buttonText}>Map</Text>
@@ -98,18 +98,18 @@ const styles = StyleSheet.create({
     },
     animalContainer: {
         width: Dimensions.get("window").width,
-        height: Dimensions.get("window").height * 0.862,
+        height: Dimensions.get("window").height * 0.9,
         marginBottom: Dimensions.get("window").height * 0.065,
         alignSelf: "center",
     },
     animalButtonContainer: {
         width: Dimensions.get("window").width * 0.8,
-        height: Dimensions.get("window").height * 0.7,
+        height: Dimensions.get("window").height * 0.8,
         flex: 1,
         alignSelf: "center",
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 80,
+        marginTop: 135,
     },
     animalButton1: {
         backgroundColor: "#A2C23D",
@@ -154,11 +154,10 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "row",
         position: "absolute",
-        top: Platform.OS === 'ios'? Dimensions.get("window").height * 0.825: Dimensions.get("window").height * 0.865,
+        top: Platform.OS === 'ios'? Dimensions.get("window").height * 0.962: Dimensions.get("window").height * 0.982,
     },
     button: {
         backgroundColor: "#A2C23D",
-        opacity: 0.85,
         flex: 1,
         height: 50,
         padding: 5,
@@ -194,8 +193,8 @@ const styles = StyleSheet.create({
         width: Dimensions.get("window").height * 0.06,
         height: Dimensions.get("window").height * 0.06,
         position: "absolute",
-        right: 10,
-        top: 10,
+        right: 20,
+        top: Dimensions.get("window").height * 0.09,
         resizeMode: "contain",
     },
 });

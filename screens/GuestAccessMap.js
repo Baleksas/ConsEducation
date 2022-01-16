@@ -14,9 +14,18 @@ import {
     Pressable,
     Platform,
 } from "react-native";
+import MapView from "react-native-maps";
+import map from "../customMap";
 
 const GuestAccessMap = () => {
     const navigation = useNavigation();
+
+    const [region, setRegion] = useState({
+        latitude: 51.5079145,
+        longitude: -0.0899163,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01,
+    });
     const handleHome = () => {
         navigation.navigate("GuestAccess");
     };
@@ -26,6 +35,17 @@ const GuestAccessMap = () => {
 
     return (
         <View style={styles.container}>
+            <MapView
+                showsMyLocationButton={true}
+                region={region}
+                style={styles.map}
+                onRegionChangeComplete={(region) => setRegion(region)}
+                customMapStyle={map}
+            >
+            </MapView>
+            <View style={styles.logoContainer}>
+                <Image source={require("../assets/logo.png")} style={styles.logo} />
+            </View>
             <View style={styles.buttonContainer}>
                 <View style={styles.currentButton}>
                     <Text style={styles.currentButtonText}>Map</Text>
@@ -53,10 +73,11 @@ const styles = StyleSheet.create({
         width: Dimensions.get("window").width,
         height:
             Platform.OS === "ios"
-                ? Dimensions.get("window").height * 0.77
-                : Dimensions.get("window").height * 0.79,
-        alignSelf: "center",
+                ? Dimensions.get("window").height
+                : Dimensions.get("screen").height,
         borderColor: "black",
+        top: 0,
+        position: "absolute",
     },
     container: {
         flex: 1,
@@ -114,12 +135,21 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         marginTop: 10,
     },
+    logoContainer: {
+        width: Dimensions.get("window").height * 0.06,
+        height: Dimensions.get("window").height * 0.06,
+        position: "absolute",
+        right: 5,
+        top: 5,
+        margin: 10,
+        marginTop: 10,
+    },
     logo: {
         width: Dimensions.get("window").height * 0.06,
         height: Dimensions.get("window").height * 0.06,
         position: "absolute",
-        right: 10,
-        top: 5,
+        right: 0,
+        top: Dimensions.get("window").height * 0.069,
         resizeMode: "contain",
     },
 });

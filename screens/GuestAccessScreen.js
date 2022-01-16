@@ -56,7 +56,7 @@ const GuestAccessScreen = () => {
                     <Text style={styles.currentButtonText}>Home</Text>
                 </View>
                 <TouchableOpacity onPress={handleSelection} style={styles.button}>
-                    <Text style={styles.buttonText}>Selection</Text>
+                    <Text style={styles.buttonText}>Animals</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -126,6 +126,8 @@ const styles = StyleSheet.create({
     logo: {
         width: Dimensions.get("window").width * 0.92,
         height: 100,
+        top: Dimensions.get("window").height * 0.44,
+        position: "absolute",
         alignSelf: "center",
         resizeMode: "contain",
     },

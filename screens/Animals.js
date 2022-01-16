@@ -98,21 +98,21 @@ const Animals = () => {
         {!isLoading ? (
           <>
             {AnimalsArray.map((element, index) => (
-              <View key={index} style={styles.animalTextContainer}>
-                {index !== 0 && <Text style={styles.animalIndex}>{index}.</Text>}
-                <TouchableOpacity
-                  onPress={() =>
-                    navigation.navigate("AnimalId", {
-                      ind: index,
-                      works: true,
-                      animal: AnimalsArray[index],
-                    })
-                  }
-                  style={styles.animalLink}
-                >
-                  {index !== 0 && <Text style={styles.animalText}>{element.name}</Text>}
-                </TouchableOpacity>
-              </View>
+                <View key={index}>
+                  <TouchableOpacity
+                      onPress={() =>
+                          navigation.navigate("AnimalId", {
+                            ind: index,
+                            works: true,
+                            animal: AnimalsArray[index],
+                          })
+                      }
+                      style={styles.animalTextContainer}
+                  >
+                    {index !== 0 && <Text style={styles.animalIndex}>{index}. </Text>}
+                    {index !== 0 && <Text style={styles.animalText}>{element.name}</Text>}
+                  </TouchableOpacity>
+                </View>
             ))}
           </>
         ) : (
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   animalText: {
     fontSize: 15,
     marginLeft: 75,
-    bottom: 17,
+    bottom: 8,
     color: "#788E2D",
     position: "absolute",
     fontWeight: "700",
@@ -207,7 +207,6 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "#A2C23D",
-    opacity: 0.85,
     flex: 1,
     height: 50,
     padding: 5,
