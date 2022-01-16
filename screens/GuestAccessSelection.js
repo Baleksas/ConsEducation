@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "row",
         position: "absolute",
-        top: Platform.OS === 'ios'? Dimensions.get("window").height * 0.962: Dimensions.get("window").height * 0.982,
+        top: Platform.OS === 'ios'? Dimensions.get("window").height * 0.94: Dimensions.get("window").height * 0.982,
     },
     button: {
         backgroundColor: "#A2C23D",
