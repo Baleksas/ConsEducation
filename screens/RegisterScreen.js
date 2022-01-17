@@ -18,7 +18,6 @@ import Login from "./LoginScreen";
 const RegisterScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
   const [confirm_password, setConfirmPassword] = useState("");
 
   const navigation = useNavigation();
@@ -65,12 +64,6 @@ const RegisterScreen = () => {
           placeholder="Email"
           value={email}
           onChangeText={(text) => setEmail(text)}
-          style={styles.input}
-        />
-        <TextInput
-          placeholder="Username"
-          value={username}
-          onChangeText={(text) => setUsername(text)}
           style={styles.input}
         />
         <TextInput
