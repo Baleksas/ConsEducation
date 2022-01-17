@@ -45,6 +45,12 @@ const SettingScreen = () => {
       <View style={styles.logoContainer}>
         <Image source={require("../assets/logo2.png")} style={styles.logo} />
       </View>
+      <Text style={styles.username}>
+        Logged in as:
+      </Text>
+      <Text style={styles.username}>
+        {auth.currentUser?.email}
+      </Text>
       <View style={styles.logoutButtonContainer}>
         <TouchableOpacity onPress={handleSignOut} style={styles.logoutButton}>
           <Text style={styles.logoutButtonText}>Logout</Text>
@@ -81,6 +87,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  username: {
+    alignSelf: "center",
+    marginTop: 5,
+    fontSize: 20,
+    color: "#788E2D",
   },
   logoutButtonContainer: {
     width: "60%",
@@ -145,9 +157,8 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   logo: {
-    width: 300,
+    width: Dimensions.get("window").width * 0.8,
     height: 100,
-    marginTop: 40,
     alignSelf: "center",
     resizeMode: "contain",
   },

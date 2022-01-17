@@ -10,7 +10,6 @@ import {
   Image,
   Dimensions,
 } from "react-native";
-import { auth } from "../firebase";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -30,10 +29,6 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.username}>
-        Logged in as: {auth.currentUser?.username}
-      </Text>
-      <Text style={styles.email}>Email: {auth.currentUser?.email}</Text>
       <Image source={require("../assets/logo2.png")} style={styles.logo} />
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={handleGeo} style={styles.button}>
@@ -63,20 +58,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-  },
-  email: {
-    position: "absolute",
-    top: 75,
-    left: 5,
-    fontSize: 22,
-    color: "black",
-  },
-  username: {
-    position: "absolute",
-    top: 50,
-    left: 5,
-    fontSize: 22,
-    color: "black",
   },
   buttonContainer: {
     height: Dimensions.get("window").height * 0.065,
