@@ -99,7 +99,7 @@ const Animals = () => {
           <>
             {AnimalsArray.map((element, index) => (
                 <View key={index}>
-                  <TouchableOpacity
+                  {index !== 0 && <TouchableOpacity
                       onPress={() =>
                           navigation.navigate("AnimalId", {
                             ind: index,
@@ -109,9 +109,9 @@ const Animals = () => {
                       }
                       style={styles.animalTextContainer}
                   >
-                    {index !== 0 && <Text style={styles.animalIndex}>{index}. </Text>}
-                    {index !== 0 && <Text style={styles.animalText}>{element.name}</Text>}
-                  </TouchableOpacity>
+                    <Text style={styles.animalIndex}>{index}. </Text>
+                    <Text style={styles.animalText}>{element.name}</Text>
+                  </TouchableOpacity>}
                 </View>
             ))}
           </>
