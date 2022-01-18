@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */
 
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { useNavigation } from "@react-navigation/core";
 
 import {
@@ -8,10 +8,8 @@ import {
     Text,
     View,
     Dimensions,
-    Button,
     Image,
     TouchableOpacity,
-    Pressable,
     Platform,
 } from "react-native";
 import MapView from "react-native-maps";

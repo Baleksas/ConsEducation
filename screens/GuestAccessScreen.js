@@ -1,19 +1,16 @@
 /*jshint esversion: 6 */
 
 import { useNavigation } from "@react-navigation/core";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import {
     Dimensions,
     Image,
-    KeyboardAvoidingView,
     StyleSheet,
     Text,
-    TextInput,
     TouchableOpacity,
     View,
 } from "react-native";
-import { auth } from "../firebase";
 
 const GuestAccessScreen = () => {
     const navigation = useNavigation();

@@ -4,7 +4,6 @@ import { useNavigation } from "@react-navigation/core";
 import React from "react";
 import {StyleSheet, Text, TouchableOpacity, View, Image, Dimensions} from "react-native";
 import { auth } from "../firebase";
-import { Touchable } from "react-native-web";
 
 const SettingScreen = () => {
   const navigation = useNavigation();

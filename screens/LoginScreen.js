@@ -10,7 +10,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View, Dimensions,
+  View, Dimensions, Platform,
 } from "react-native";
 import { auth } from "../firebase";
 

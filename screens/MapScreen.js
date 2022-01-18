@@ -6,17 +6,14 @@ import { useNavigation } from "@react-navigation/core";
 
 import * as Location from "expo-location";
 import MapView from "react-native-maps";
-import { Marker } from "react-native-maps";
 import map from "../customMap";
 import {
   StyleSheet,
   Text,
   View,
   Dimensions,
-  Button,
   Image,
   TouchableOpacity,
-  Pressable,
   Platform,
 } from "react-native";
 

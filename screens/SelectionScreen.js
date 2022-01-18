@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */
 
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -10,11 +10,6 @@ import {
   Dimensions, Platform, Image,
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from "./HomeScreen";
-import SettingScreen from "./SettingScreen";
-import MapScreen from "./MapScreen";
-import CameraScreen from "./CameraScreen"
 
 // const Tab = createBottomTabNavigator();
 const SelectionScreen = () => {

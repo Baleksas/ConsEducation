@@ -1,13 +1,12 @@
 /*jshint esversion: 6 */
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import {
     StyleSheet,
     Text,
     View,
     TouchableOpacity,
-    ScrollView,
     Dimensions, Image, Platform
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";

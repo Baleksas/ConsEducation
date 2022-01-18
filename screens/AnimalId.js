@@ -1,15 +1,13 @@
 /*jshint esversion: 6 */
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
     StyleSheet,
     Text,
     View,
-    Screen,
-    TouchableOpacity,
-    ScrollView, Dimensions, Image,
+    Dimensions,
+    Image,
 } from "react-native";
-import { useNavigation } from "@react-navigation/core";
 const AnimalId = ({ navigation, route }) => {
   const { ind, works, animal } = route.params;
   return (

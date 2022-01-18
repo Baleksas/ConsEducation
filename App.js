@@ -70,7 +70,6 @@ export default function App() {
                 : route.params.animal.name,
           })}
         />
-        <Stack.Screen name="Plants" component={Plants} />
         <Stack.Screen name="Settings" component={SettingScreen} />
         <Stack.Screen name="Selection" component={SelectionScreen} />
         <Stack.Screen name="Mammals" component={Mammals} />
