@@ -9,9 +9,6 @@ import LoginScreen from "./screens/LoginScreen";
 import HomeScreen from "./screens/HomeScreen";
 import Animals from "./screens/Animals";
 import AnimalId from "./screens/AnimalId";
-
-import Plants from "./screens/Plants";
-
 import MapScreen from "./screens/MapScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import GuestAccessScreen from "./screens/GuestAccessScreen";
