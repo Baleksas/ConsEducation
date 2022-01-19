@@ -14,36 +14,45 @@ import {
 } from "react-native";
 import { auth } from "../firebase";
 
+// Creates Login Screen, where the users are authenticated or
+// redirected to Register or Guest Access pages.
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigation = useNavigation();
 
-  const handleSignUp = () => {
-      return (
-          navigation.replace("Register")
-      );
-  };
-
+  // Authentication of the user, checking if their credentials
+  // are stored in the database.
   const handleLogin = () => {
     auth
       .signInWithEmailAndPassword(email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
         console.log("Logged in with:", user.email);
+
+        // If the user is successfully authenticated, they are redirected to the Home page.
         if (user) {
           navigation.replace("Home");
         }})
         .catch((error) => alert(error.message));
   };
 
-  const handleGuest = () => {
+  // Navigation to Register page.
+  const handleSignUp = () => {
     return (
-        navigation.replace("GuestAccess")
+        navigation.replace("Register")
     );
   };
 
+  // Navigation to Guest Access page.
+  const handleGuest = () => {
+    return (
+      navigation.replace("GuestAccess")
+    );
+  };
+
+  // Renders the page and its elements.
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -91,6 +100,7 @@ const LoginScreen = () => {
 
 export default LoginScreen;
 
+// Creates a stylesheet for the design of the page.
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -24,6 +24,8 @@ const tokyoRegion = {
   longitudeDelta: 0.01,
 };
 
+// Creates a Map Screen, where a map is shown (hopefully together with sightings)
+// and the user can find their location on the map.
 const MapScreen = () => {
   const [location, setLocation] = useState(null);
   const [showLocation, setShowLocation] = useState(false);
@@ -40,19 +42,7 @@ const MapScreen = () => {
 
   const navigation = useNavigation();
 
-  const handleHome = () => {
-    navigation.replace("Home");
-  };
-  const handleSelection = () => {
-    navigation.navigate("Selection");
-  };
-  const handleCamera = () => {
-    navigation.navigate("Camera");
-  };
-  const handleSettings = () => {
-    navigation.navigate("Settings");
-  };
-
+  // Asks for location permission and retrieves user's coordinates.
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -80,6 +70,7 @@ const MapScreen = () => {
     // setLongitude(JSON.stringify(location.coords.longitude));
   }
 
+  // Sets the current region on the map to user's location.
   const handleLocation = () => {
     setRegion({
       latitude: parseFloat(lat),
@@ -88,6 +79,28 @@ const MapScreen = () => {
       longitudeDelta: 0.01,
     });
   };
+
+  // Navigation to Home page.
+  const handleHome = () => {
+    navigation.replace("Home");
+  };
+
+  // Navigation to Animal Selection page.
+  const handleSelection = () => {
+    navigation.navigate("Selection");
+  };
+
+  // Navigation to Camera page.
+  const handleCamera = () => {
+    navigation.navigate("Camera");
+  };
+
+  // Navigation to Settings page.
+  const handleSettings = () => {
+    navigation.navigate("Settings");
+  };
+
+  // Renders the page and its elements.
   return (
     <View styles={styles.container}>
       <View>
@@ -148,6 +161,7 @@ const MapScreen = () => {
 
 export default MapScreen;
 
+// Creates a stylesheet for the design of the page.
 const styles = StyleSheet.create({
   flex: {
     flexDirection: "row",

@@ -10,24 +10,10 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 
+// Creates a Mammal Screen, where all the different Mammal species are listed.
+// The user can click on a species for more information about them.
 const Mammals = () => {
   const [isLoading, setIsLoading] = useState(true);
-
-  const navigation = useNavigation();
-
-  const handleAll = () => {
-    navigation.navigate("Animals");
-  };
-  const handleReptiles = () => {
-    navigation.navigate("Reptiles");
-  };
-  const handleBirds = () => {
-    navigation.navigate("Birds");
-  };
-  const handleAmphibians = () => {
-    navigation.navigate("Amphibians");
-  };
-
   const [AnimalsArray, setAnimalsArray] = useState([
     {
       name: "",
@@ -39,6 +25,30 @@ const Mammals = () => {
       isNative: false,
     },
   ]);
+
+  const navigation = useNavigation();
+
+  // Navigation to Reptiles page.
+  const handleReptiles = () => {
+    navigation.navigate("Reptiles");
+  };
+
+  // Navigation to Birds page
+  const handleBirds = () => {
+    navigation.navigate("Birds");
+  };
+
+  // Navigation to Amphibians page.
+  const handleAmphibians = () => {
+    navigation.navigate("Amphibians");
+  };
+
+  // Navigation to Animals page.
+  const handleAll = () => {
+    navigation.navigate("Animals");
+  };
+
+  // Connects to a public database and retrieves mammal data.
   useEffect(() => {
     fetch("https://explorer.natureserve.org/api/data/speciesSearch", {
       method: "POST",
@@ -70,6 +80,7 @@ const Mammals = () => {
       .then((response) => response.json())
       .then((json) => {
         json.results.forEach((element) => {
+          // Creates an array of the amphibian species.
           setAnimalsArray((AnimalsArray) => [
             ...AnimalsArray,
             {
@@ -94,6 +105,8 @@ const Mammals = () => {
         console.error(error);
       });
   }, []);
+
+  // Renders the page and its elements.
   return (
     <View>
       <ScrollView style={styles.animalContainer}>
@@ -147,6 +160,7 @@ const Mammals = () => {
 
 export default Mammals;
 
+// Creates a stylesheet for the design of the page.
 const styles = StyleSheet.create({
   container: {
     flex: 1,

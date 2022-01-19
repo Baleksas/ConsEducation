@@ -9,24 +9,10 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 
+// Creates a Reptiles Screen, where all the different reptile species are listed.
+// The user can click on a species for more information about them.
 const Reptiles = () => {
   const [isLoading, setIsLoading] = useState(true);
-
-  const navigation = useNavigation();
-
-  const handleMammals = () => {
-    navigation.navigate("Mammals");
-  };
-  const handleAll = () => {
-    navigation.navigate("Animals");
-  };
-  const handleBirds = () => {
-    navigation.navigate("Birds");
-  };
-  const handleAmphibians = () => {
-    navigation.navigate("Amphibians");
-  };
-
   const [AnimalsArray, setAnimalsArray] = useState([
     {
       name: "",
@@ -38,6 +24,30 @@ const Reptiles = () => {
       isNative: false,
     },
   ]);
+
+  const navigation = useNavigation();
+
+  // Navigation to Mammals page.
+  const handleMammals = () => {
+    navigation.navigate("Mammals");
+  };
+
+  // Navigation to Birds page.
+  const handleBirds = () => {
+    navigation.navigate("Birds");
+  };
+
+  // Navigation to Amphibians page.
+  const handleAmphibians = () => {
+    navigation.navigate("Amphibians");
+  };
+
+  // Navigation to Animals page.
+  const handleAll = () => {
+    navigation.navigate("Animals");
+  };
+
+  // Connects to a public database and retrieves reptile data.
   useEffect(() => {
     fetch("https://explorer.natureserve.org/api/data/speciesSearch", {
       method: "POST",
@@ -69,6 +79,7 @@ const Reptiles = () => {
       .then((response) => response.json())
       .then((json) => {
         json.results.forEach((element) => {
+          // Creates an array of the reptile species.
           setAnimalsArray((AnimalsArray) => [
             ...AnimalsArray,
             {
@@ -93,6 +104,8 @@ const Reptiles = () => {
         console.error(error);
       });
   }, []);
+
+  // Renders the page and its elements.
   return (
     <View>
       <ScrollView style={styles.animalContainer}>
@@ -146,6 +159,7 @@ const Reptiles = () => {
 
 export default Reptiles;
 
+// Creates a stylesheet for the design of the page.
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -10,7 +10,11 @@ import {
   Dimensions, Platform, Image,
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
+
+// Creates an Animal Screen, where all the different animal species are listed.
+// The user can click on a species for more information about them.
 const Animals = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [AnimalsArray, setAnimalsArray] = useState([
     {
       name: "",
@@ -22,23 +26,30 @@ const Animals = () => {
       isNative: false,
     },
   ]);
+
   const navigation = useNavigation();
 
+  // Navigation to Mammals page.
   const handleMammals = () => {
     navigation.navigate("Mammals");
   };
+
+  //Navigation to Reptiles page.
   const handleReptiles = () => {
     navigation.navigate("Reptiles");
   };
+
+  // Navigation to Birds page.
   const handleBirds = () => {
     navigation.navigate("Birds");
   };
+
+  // Navigation to Amphibians page.
   const handleAmphibians = () => {
     navigation.navigate("Amphibians");
   };
 
-  const [isLoading, setIsLoading] = useState(true);
-
+  // Connects to a public database and retrieves animal data.
   useEffect(() => {
     fetch("https://explorer.natureserve.org/api/data/speciesSearch", {
       method: "POST",
@@ -65,7 +76,7 @@ const Animals = () => {
       .then((response) => response.json())
       .then((json) => {
         json.results.forEach((element) => {
-          console.log(element);
+          // Creates an array of all the animals in the database.
           setAnimalsArray((AnimalsArray) => [
             ...AnimalsArray,
             {
@@ -84,7 +95,6 @@ const Animals = () => {
           ]);
         });
         setIsLoading(false);
-        console.log(json);
         return json;
       })
       .catch((error) => {
@@ -92,6 +102,7 @@ const Animals = () => {
       });
   }, []);
 
+  // Renders the page and its elements.
   return (
     <View>
       <ScrollView style={styles.animalContainer}>
@@ -145,6 +156,7 @@ const Animals = () => {
 
 export default Animals;
 
+// Creates a stylesheet for the design of the page.
 const styles = StyleSheet.create({
   container: {
     flex: 1,

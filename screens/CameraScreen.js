@@ -14,10 +14,8 @@ import { Camera } from "expo-camera";
 import { useNavigation } from "@react-navigation/core";
 import * as Location from "expo-location";
 
+// Creates a Camera Screen that allows the user to take a photo or flip the camera.
 const CameraScreen = () => {
-  const handleHome = () => {
-    navigation.replace("Home");
-  };
   const navigation = useNavigation();
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
@@ -25,6 +23,7 @@ const CameraScreen = () => {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
 
+  // Asks for location permissions.
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -38,6 +37,7 @@ const CameraScreen = () => {
     })();
   }, []);
 
+  // Asks for camera permissions.
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestCameraPermissionsAsync();
@@ -51,22 +51,35 @@ const CameraScreen = () => {
     return handleHome();
   }
 
+  // Navigation to Home page.
+  const handleHome = () => {
+    navigation.replace("Home");
+  };
+
+  // Navigation to Map page.
   const handleGeo = () => {
     navigation.navigate("Map");
   };
+
+  // Navigation to Animal Selection page.
   const handleSelection = () => {
     navigation.navigate("Selection");
   };
+
+  // Navigation to Settings page.
   const handleSettings = () => {
     navigation.navigate("Settings");
   };
 
+  // Takes a photo.
   const handlePhoto = async () => {
     const photo = await ref.current.takePictureAsync();
     console.log(photo);
     const photo_lat = location.coords.latitude;
     const photo_long = location.coords.longitude;
   };
+
+  // Renders the page and its elements.
   return (
     <View style={styles.container}>
       <Camera style={styles.camera} type={type} flashMode={"auto"} ref={ref}>
@@ -114,6 +127,7 @@ const CameraScreen = () => {
 
 export default CameraScreen;
 
+// Creates a stylesheet for the design of the page.
 const styles = StyleSheet.create({
   container: {
     flex: 1,

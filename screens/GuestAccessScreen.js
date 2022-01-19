@@ -12,26 +12,35 @@ import {
     View,
 } from "react-native";
 
+// Creates a Guest Access Home Screen, where the user is redirected after
+// clicking guest access, and contains a navigation bar to Animal Selection and
+// Map screens, and an option to Login or Register.
+// Different from user version because of the limited navigation bar.
 const GuestAccessScreen = () => {
     const navigation = useNavigation();
     const [taxonomies, setTaxonomies] = useState();
 
+    // Navigation to Guest Access Map page.
     const handleGeo = () => {
         navigation.navigate("GuestAccessMap");
     };
-    const handleHome = () => {
-        navigation.navigate("GuestAccessScreen");
-    };
+
+    // Navigation to Guest Access Animal Selection page.
     const handleSelection = () => {
         navigation.navigate("GuestAccessSelection");
     };
+
+    // Navigation to Login page.
     const handleLogin = () => {
       navigation.navigate("Login");
     };
+
+    // Navigation to Register page.
     const handleRegister = () => {
       navigation.navigate("Register");
     };
 
+    // Renders the page and its elements.
     return (
         <View style={styles.container}>
             <Image source={require("../assets/logo2.png")} style={styles.logo} />
@@ -62,6 +71,7 @@ const GuestAccessScreen = () => {
 
 export default GuestAccessScreen;
 
+// Creates a stylesheet for the design of the page.
 const styles = StyleSheet.create({
     container: {
         flex: 1,

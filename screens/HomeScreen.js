@@ -11,22 +11,29 @@ import {
   Dimensions,
 } from "react-native";
 
+// Creates Home Screen, where the users are redirected
+// after logging in, and contains a navigation bar to the rest of the app.
 const HomeScreen = () => {
   const navigation = useNavigation();
 
+  // Navigation to Maps page.
   const handleGeo = () => {
     navigation.navigate("Map");
   };
+  // Navigation to Animal Selection page.
   const handleSelection = () => {
     navigation.navigate("Selection");
   };
+  // Navigation to Camera page.
   const handleCamera = () => {
     navigation.navigate("Camera");
   };
+  // Navigation to Settings page.
   const handleSettings = () => {
     navigation.navigate("Settings");
   };
 
+  // Renders the page and its elements.
   return (
     <View style={styles.container}>
       <Image source={require("../assets/logo2.png")} style={styles.logo} />
@@ -53,6 +60,7 @@ const HomeScreen = () => {
 
 export default HomeScreen;
 
+// Creates a stylesheet for the design of the page.
 const styles = StyleSheet.create({
   container: {
     flex: 1,

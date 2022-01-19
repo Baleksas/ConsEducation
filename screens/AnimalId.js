@@ -8,10 +8,14 @@ import {
     Dimensions,
     Image,
 } from "react-native";
+
+// Creates an Animal information screen where the information
+// about chosen species is displayed.
 const AnimalId = ({ navigation, route }) => {
   const { ind, works, animal } = route.params;
-  return (
 
+    // Renders the page and its elements.
+  return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
         <Image source={require("../assets/logo.png")} style={styles.logo}/>
@@ -46,6 +50,7 @@ const AnimalId = ({ navigation, route }) => {
 
 export default AnimalId;
 
+// Creates a stylesheet for the design of the page.
 const styles = StyleSheet.create({
     container: {
         flex: 1,

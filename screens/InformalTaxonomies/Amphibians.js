@@ -9,24 +9,10 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 
+// Creates an Amphibians Screen, where all the different amphibian species are listed.
+// The user can click on a species for more information about them.
 const Amphibians = () => {
   const [isLoading, setIsLoading] = useState(true);
-
-  const navigation = useNavigation();
-
-  const handleMammals = () => {
-    navigation.navigate("Mammals");
-  };
-  const handleReptiles = () => {
-    navigation.navigate("Reptiles");
-  };
-  const handleBirds = () => {
-    navigation.navigate("Birds");
-  };
-  const handleAll = () => {
-    navigation.navigate("Animals");
-  };
-
   const [AnimalsArray, setAnimalsArray] = useState([
     {
       name: "",
@@ -38,6 +24,30 @@ const Amphibians = () => {
       isNative: false,
     },
   ]);
+
+  const navigation = useNavigation();
+
+  // Navigation to Mammals page.
+  const handleMammals = () => {
+    navigation.navigate("Mammals");
+  };
+
+  //Navigation to Reptiles page.
+  const handleReptiles = () => {
+    navigation.navigate("Reptiles");
+  };
+
+  // Navigation to Birds page.
+  const handleBirds = () => {
+    navigation.navigate("Birds");
+  };
+
+  // Navigation to Animals page.
+  const handleAll = () => {
+    navigation.navigate("Animals");
+  };
+
+  // Connects to a public database and retrieves amphibian data.
   useEffect(() => {
     fetch("https://explorer.natureserve.org/api/data/speciesSearch", {
       method: "POST",
@@ -69,6 +79,7 @@ const Amphibians = () => {
       .then((response) => response.json())
       .then((json) => {
         json.results.forEach((element) => {
+          // Creates an array of the amphibian species.
           setAnimalsArray((AnimalsArray) => [
             ...AnimalsArray,
             {
@@ -93,6 +104,8 @@ const Amphibians = () => {
         console.error(error);
       });
   }, []);
+
+  // Renders the page and its elements.
   return (
     <View>
       <ScrollView style={styles.animalContainer}>
@@ -146,6 +159,7 @@ const Amphibians = () => {
 
 export default Amphibians;
 
+// Creates a stylesheet for the design of the page.
 const styles = StyleSheet.create({
   container: {
     flex: 1,

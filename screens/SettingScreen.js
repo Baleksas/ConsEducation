@@ -5,9 +5,12 @@ import React from "react";
 import {StyleSheet, Text, TouchableOpacity, View, Image, Dimensions} from "react-native";
 import { auth } from "../firebase";
 
+// Creates a Settings Screen, where the user's email is displayed
+// and the user can delete their account or log out.
 const SettingScreen = () => {
   const navigation = useNavigation();
 
+  // Deletes the user's account from the database.
   const handleDelete = () => {
     auth.currentUser
       .delete()
@@ -17,6 +20,7 @@ const SettingScreen = () => {
       .catch((error) => alert(error.message));
   };
 
+  // Signs the user out.
   const handleSignOut = () => {
     auth
       .signOut()
@@ -26,19 +30,27 @@ const SettingScreen = () => {
       .catch((error) => alert(error.message));
   };
 
+  // Navigation to the Map page.
   const handleGeo = () => {
     navigation.navigate("Map");
   };
+
+  // Navigation to the Selection page.
   const handleSelection = () => {
     navigation.navigate("Selection");
   };
+
+  // Navigation to the Home page.
   const handleHome = () => {
     navigation.navigate("Home");
   };
+
+  // Navigation to the Camera page.
   const handleCamera = () => {
     navigation.navigate("Camera");
   };
 
+  // Renders the page and its elements.
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
@@ -81,6 +93,7 @@ const SettingScreen = () => {
 
 export default SettingScreen;
 
+// Creates a stylesheet for the design of the page.
 const styles = StyleSheet.create({
   container: {
     flex: 1,

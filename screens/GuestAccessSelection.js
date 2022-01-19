@@ -10,20 +10,30 @@ import {
     Dimensions, Image, Platform
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
+
+// Creates a Guest Access Animal Selection Screen, where the user can choose to
+// navigate between the different species based on their class.
+// Different from user version because of the limited navigation bar.
 const SelectionScreen = () => {
     const navigation = useNavigation();
     const [taxonomies, setTaxonomies] = useState();
 
+    // Navigation to Guest Access Map page.
     const handleGeo = () => {
         navigation.navigate("GuestAccessMap");
     };
+
+    // Navigation to Guest Access Home page.
     const handleHome = () => {
         navigation.navigate("GuestAccess");
     };
+
+    // Navigation to a page of a different animal subgroup based on the user's choice.
     const handleCustom = (custom) => {
         navigation.navigate(`${custom}`);
     };
 
+    // Renders the page and its elements.
     return (
         <View>
             <Image source={require("../assets/logo.png")} style={styles.logo} />
@@ -79,6 +89,7 @@ const SelectionScreen = () => {
 
 export default SelectionScreen;
 
+// Creates a stylesheet for the design of the page.
 const styles = StyleSheet.create({
     container: {
         flex: 1,

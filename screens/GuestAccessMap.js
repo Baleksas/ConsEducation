@@ -15,22 +15,30 @@ import {
 import MapView from "react-native-maps";
 import map from "../customMap";
 
+// Creates a Guest Access Map Screen, where a map is shown
+// (hopefully together with sightings) and the user can find their location on the map.
+// Different from user version because of the limited navigation bar
+// and no option to show the user's location on the map.
 const GuestAccessMap = () => {
     const navigation = useNavigation();
-
     const [region, setRegion] = useState({
         latitude: 51.5079145,
         longitude: -0.0899163,
         latitudeDelta: 0.01,
         longitudeDelta: 0.01,
     });
+
+    // Navigation to Guest Access Home page.
     const handleHome = () => {
         navigation.navigate("GuestAccess");
     };
+
+    // Navigation to Guest Access Animal Selection page.
     const handleSelection = () => {
         navigation.navigate("GuestAccessSelection");
     };
 
+    // Renders the page and its elements.
     return (
         <View style={styles.container}>
             <MapView
@@ -61,6 +69,7 @@ const GuestAccessMap = () => {
 
 export default GuestAccessMap;
 
+// Creates a stylesheet for the design of the page.
 const styles = StyleSheet.create({
     flex: {
         flexDirection: "row",

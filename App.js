@@ -22,6 +22,7 @@ import GuestAccessSelection from "./screens/GuestAccessSelection";
 import GuestAccessMap from "./screens/GuestAccessMap";
 const Stack = createNativeStackNavigator();
 
+// Creates the app and links all the screens.
 export default function App() {
   return (
     <NavigationContainer>

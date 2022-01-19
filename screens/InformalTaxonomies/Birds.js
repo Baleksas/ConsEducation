@@ -9,24 +9,10 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 
+// Creates a Birds Screen, where all the different bird species are listed.
+// The user can click on a species for more information about them.
 const Birds = () => {
   const [isLoading, setIsLoading] = useState(true);
-
-  const navigation = useNavigation();
-
-  const handleMammals = () => {
-    navigation.navigate("Mammals");
-  };
-  const handleReptiles = () => {
-    navigation.navigate("Reptiles");
-  };
-  const handleAll = () => {
-    navigation.navigate("Animals");
-  };
-  const handleAmphibians = () => {
-    navigation.navigate("Amphibians");
-  };
-
   const [AnimalsArray, setAnimalsArray] = useState([
     {
       name: "",
@@ -38,6 +24,30 @@ const Birds = () => {
       isNative: false,
     },
   ]);
+
+  const navigation = useNavigation();
+
+  // Navigation to Mammals page.
+  const handleMammals = () => {
+    navigation.navigate("Mammals");
+  };
+
+  //Navigation to Reptiles page.
+  const handleReptiles = () => {
+    navigation.navigate("Reptiles");
+  };
+
+  // Navigation to Amphibians page.
+  const handleAmphibians = () => {
+    navigation.navigate("Amphibians");
+  };
+
+  //Navigation to Animals page.
+  const handleAll = () => {
+    navigation.navigate("Animals");
+  };
+
+  // Connects to a public database and retrieves bird data.
   useEffect(() => {
     fetch("https://explorer.natureserve.org/api/data/speciesSearch", {
       method: "POST",
@@ -69,6 +79,7 @@ const Birds = () => {
       .then((response) => response.json())
       .then((json) => {
         json.results.forEach((element) => {
+          // Creates an array of the bird species.
           setAnimalsArray((AnimalsArray) => [
             ...AnimalsArray,
             {
@@ -93,6 +104,8 @@ const Birds = () => {
         console.error(error);
       });
   }, []);
+
+  // Renders the page and its elements.
   return (
     <View>
       <ScrollView style={styles.animalContainer}>
@@ -146,6 +159,8 @@ const Birds = () => {
 
 export default Birds;
 
+
+// Creates a stylesheet for the design of the page.
 const styles = StyleSheet.create({
   container: {
     flex: 1,

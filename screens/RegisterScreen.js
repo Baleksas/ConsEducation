@@ -14,6 +14,7 @@ import {
 import { auth } from "../firebase";
 import Login from "./LoginScreen";
 
+// Creates a Register Screen, where the users can register, or be redirected back to the login page.
 const RegisterScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,16 +22,17 @@ const RegisterScreen = () => {
 
   const navigation = useNavigation();
 
+  // If the user is authenticated, they are redirected to the Home page.
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         navigation.replace("Home");
       }
     });
-
     return unsubscribe;
   }, []);
 
+  // If the input passwords match, the user's details are stored in the database.
   const handleSignUp = () => {
     if (password === confirm_password) {
       auth
@@ -46,10 +48,12 @@ const RegisterScreen = () => {
 
   };
 
+  // Navigation to the Login page.
   const handleLogin = () => {
     navigation.replace("Login");
   };
 
+  // Renders the page and its elements.
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -98,6 +102,7 @@ const RegisterScreen = () => {
 
 export default RegisterScreen;
 
+// Creates a stylesheet for the design of the page.
 const styles = StyleSheet.create({
   container: {
     flex: 1,

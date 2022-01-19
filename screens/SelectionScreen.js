@@ -11,29 +11,38 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 
-// const Tab = createBottomTabNavigator();
+// Creates an Animal Selection Screen, where the user can choose to
+// navigate between the different species based on their class.
 const SelectionScreen = () => {
   const navigation = useNavigation();
   const [taxonomies, setTaxonomies] = useState();
 
+  // Navigation to Map page.
   const handleGeo = () => {
     navigation.navigate("Map");
   };
+
+  // Navigation to Home page.
   const handleHome = () => {
     navigation.navigate("Home");
   };
+
+  // Navigation to Camera page.
   const handleCamera = () => {
     navigation.navigate("Camera");
   };
+
+  // Navigation to a page of a different animal subgroup based on the user's choice.
   const handleCustom = (custom) => {
     navigation.navigate(`${custom}`);
   };
+
+  // Navigation to Settings page.
   const handleSettings = () => {
     navigation.navigate("Settings");
   };
 
-  const MapRoute = () => <Text>Map</Text>
-
+  // Renders the page and its elements.
   return (
     <View>
       <Image source={require("../assets/logo.png")} style={styles.logo} />
@@ -95,6 +104,7 @@ const SelectionScreen = () => {
 
 export default SelectionScreen;
 
+// Creates a stylesheet for the design of the page.
 const styles = StyleSheet.create({
   container: {
     flex: 1,
