@@ -19,6 +19,34 @@ import map from "../customMap";
 // (hopefully together with sightings) and the user can find their location on the map.
 // Different from user version because of the limited navigation bar
 // and no option to show the user's location on the map.
+const mysqlssh = require("mysql-ssh");
+let result = null;
+mysqlssh
+    .connect(
+        {
+            host: "PUT SSH HOST HERE",
+            user: "PUT SSH USERNAME HERE",
+            password: "PUT SSH PASSWORD HERE",
+        },
+        {
+            host: "PUT DATABASE HOST HERE",
+            user: "PUT DATABASE USERNAME",
+            password: "PUT DATABASE PASSWORD HERE",
+            database: "PUT DATABASE NAME HERE",
+        }
+    )
+    .then((client) => {
+        client.query("SELECT * FROM `Sightings`", function (err, results, fields) {
+            if (err) throw err;
+            console.log(results);
+            result = results
+            mysqlssh.close();
+        });
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+
 const GuestAccessMap = () => {
     const navigation = useNavigation();
     const [region, setRegion] = useState({
