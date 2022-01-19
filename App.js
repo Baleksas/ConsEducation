@@ -20,7 +20,6 @@ import Reptiles from "./screens/InformalTaxonomies/Reptiles";
 import Birds from "./screens/InformalTaxonomies/Birds";
 import GuestAccessSelection from "./screens/GuestAccessSelection";
 import GuestAccessMap from "./screens/GuestAccessMap";
-import test from "./test";
 const Stack = createNativeStackNavigator();
 
 // Creates the app and links all the screens.
@@ -52,11 +51,6 @@ export default function App() {
             options={{ headerShown: false }}
             name="GuestAccessSelection"
             component={GuestAccessSelection}
-        />
-        <Stack.Screen
-            options={{ headerShown: false }}
-            name="test"
-            component={test}
         />
         <Stack.Screen name="Camera" component={CameraScreen} />
         <Stack.Screen name="Map" component={MapScreen} />
