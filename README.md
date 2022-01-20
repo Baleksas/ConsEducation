@@ -20,3 +20,6 @@ For Android:
 
 
 It is possible also to run the application through an emulator using the developer tools in the browser and an emmulator software.
+
+
+Our Git Repository is: https://github.com/Baleksas/ConsEducation
