@@ -12,8 +12,9 @@ import {
     TouchableOpacity,
     Platform,
 } from "react-native";
-import MapView from "react-native-maps";
+import MapView, {Marker} from "react-native-maps";
 import map from "../customMap";
+
 
 // Creates a Guest Access Map Screen, where a map is shown
 // (hopefully together with sightings) and the user can find their location on the map.
@@ -21,12 +22,44 @@ import map from "../customMap";
 // and no option to show the user's location on the map.
 const GuestAccessMap = () => {
     const navigation = useNavigation();
+    const [arrayOfSightings, updateSightingsArray] = useState([]);
+    const [sightingGotten, updateSightingGotten] = useState(false);
     const [region, setRegion] = useState({
         latitude: 51.5079145,
         longitude: -0.0899163,
         latitudeDelta: 0.01,
         longitudeDelta: 0.01,
     });
+
+    // DB URL.
+    const baseUrl = 'https://potatoapi.lucbucher.ch';
+
+    // Fetches the sightings data from the database.
+    async function GetSightings() {
+        const res = await fetch(baseUrl + '/Sightings')
+        return await res.json();
+    }
+
+    // Gets the data from the database and stores it in a variable.
+    if(!sightingGotten) {
+        updateSightingGotten(true);
+
+        GetSightings()
+            .then(function (result) {
+
+                // For each database entry, a temporary marker is created.
+                result.forEach(function (sighting) {
+                    let tempMarker = {
+                        id: sighting.id,
+                        longitude: parseFloat(sighting.longitude),
+                        latitude: parseFloat(sighting.latitude),
+                    }
+
+                    // Temporary markers are stored in the arrayOfSightings array.
+                    updateSightingsArray(arr => [...arr, tempMarker]);
+                })
+            })
+    }
 
     // Navigation to Guest Access Home page.
     const handleHome = () => {
@@ -46,8 +79,11 @@ const GuestAccessMap = () => {
                 region={region}
                 style={styles.map}
                 onRegionChangeComplete={(region) => setRegion(region)}
-                customMapStyle={map}
-            >
+                customMapStyle={map}>
+                {arrayOfSightings.map(sight =>(
+                    <Marker key={sight.id} image={require("../assets/marker1.png")}
+                    coordinate={{latitude: sight.latitude, longitude: sight.longitude}}/>
+                ))}
             </MapView>
             <View style={styles.logoContainer}>
                 <Image source={require("../assets/logo.png")} style={styles.logo} />

@@ -17,26 +17,15 @@ import {
   Platform,
 } from "react-native";
 
-const tokyoRegion = {
-  latitude: 35.6762,
-  longitude: 139.6503,
-  latitudeDelta: 0.01,
-  longitudeDelta: 0.01,
-};
 
-// Variable to see if the sightings have been retrieved from the DB.
-let sightingsGotten = false;
 
 // Creates a Map Screen, where a map is shown (hopefully together with sightings)
 // and the user can find their location on the map.
 const MapScreen = () => {
   const [location, setLocation] = useState(null);
-  const [showLocation, setShowLocation] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
-  const [showMap, setShowMap] = useState(true);
-  const arrayOfSightings = useState([]);
+  const [arrayOfSightings, updateSightingsArray] = useState([]);
+  const [sightingGotten, updateSightingGotten] = useState(false);
   const [region, setRegion] = useState({
     latitude: 51.5079145,
     longitude: -0.0899163,
@@ -71,8 +60,8 @@ const MapScreen = () => {
   }
 
   // Gets the data from the database and stores it in a variable.
-  if(!sightingsGotten) {
-    sightingsGotten = true;
+  if(!sightingGotten) {
+    updateSightingGotten(true);
 
     GetSightings()
       .then(function (result) {
@@ -80,16 +69,13 @@ const MapScreen = () => {
         // For each database entry, a temporary marker is created.
         result.forEach(function (sighting) {
           let tempMarker = {
+            id: sighting.id,
             longitude: parseFloat(sighting.longitude),
             latitude: parseFloat(sighting.latitude),
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01,
           }
 
           // Temporary markers are stored in the arrayOfSightings array.
-          arrayOfSightings.push(tempMarker);
-
-          console.log(tempMarker);
+          updateSightingsArray(arr => [...arr, tempMarker]);
         })
       })
   }
@@ -103,9 +89,6 @@ const MapScreen = () => {
     text = JSON.stringify(location.coords);
     long = JSON.stringify(location.coords.longitude);
     lat = JSON.stringify(location.coords.latitude);
-    // infinit loop renders
-    // setLatitude(JSON.stringify(location.coords.latitude));
-    // setLongitude(JSON.stringify(location.coords.longitude));
   }
 
   // Sets the current region on the map to user's location.
@@ -154,34 +137,28 @@ const MapScreen = () => {
           <Image source={require("../assets/logo.png")} style={styles.logo} />
         </View>
         <View style={styles.flex}>
-          {showMap && (
-            <TouchableOpacity style={styles.button} onPress={handleLocation}>
-              <Text style={styles.buttonText}>SHOW MY LOCATION ON THE MAP</Text>
-            </TouchableOpacity>
-          )}
+          {location
+          ? <TouchableOpacity style={styles.button} onPress={handleLocation}>
+            <Text style={styles.buttonText}>SHOW MY LOCATION ON THE MAP</Text>
+          </TouchableOpacity> :
+              <View style={styles.button}>
+                <Text style={styles.buttonText}>Location currently cannot be shown.</Text>
+              </View>}
         </View>
       </View>
 
-      {showMap ? (
-        <MapView
-          showsMyLocationButton={true}
-          region={region}
-          style={styles.map}
-          onRegionChangeComplete={(region) => setRegion(region)}
-          customMapStyle={map}
-        >
-          {arrayOfSightings.map(sight =>(
-              <Marker coordinate={sight}/>
-            ))
-          }
-          <Marker coordinate={tokyoRegion}/>
+      <MapView
+        showsMyLocationButton={true}
+        region={region}
+        style={styles.map}
+        onRegionChangeComplete={(region) => setRegion(region)}
+        customMapStyle={map}>
 
-        </MapView>
-      ) : (
-        <View>
-          <Text>No map</Text>
-        </View>
-      )}
+        {arrayOfSightings.map(sight =>(
+          <Marker key={sight.id} image={require("../assets/marker1.png")}
+          coordinate={{latitude: sight.latitude, longitude: sight.longitude}}/>
+        ))}
+      </MapView>
 
       <View style={styles.buttonContainer}>
         <View style={styles.currentButton}>
