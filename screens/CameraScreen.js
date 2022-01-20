@@ -22,6 +22,7 @@ const CameraScreen = () => {
   const ref = useRef(null);
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+  const baseUrl = 'https://potatoapi.lucbucher.ch';
 
   // Asks for location permissions.
   useEffect(() => {
@@ -77,7 +78,25 @@ const CameraScreen = () => {
     console.log(photo);
     const photo_lat = location.coords.latitude;
     const photo_long = location.coords.longitude;
+
+    await CreateSighting({ // Create
+      latitude: photo_lat.toString(),
+      longitude: photo_long.toString()
+    });
   };
+
+  async function CreateSighting(data) {
+    const res = await fetch(baseUrl + '/Sightings', {
+      method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+    data = await res.json();
+    console.log(data);
+    return data;
+  }
 
   // Renders the page and its elements.
   return (

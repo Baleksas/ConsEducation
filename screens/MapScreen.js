@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/core";
 
 import * as Location from "expo-location";
-import MapView from "react-native-maps";
+import MapView, {Marker} from "react-native-maps";
 import map from "../customMap";
 import {
   StyleSheet,
@@ -16,6 +16,7 @@ import {
   TouchableOpacity,
   Platform,
 } from "react-native";
+import {template} from "@babel/core";
 
 const tokyoRegion = {
   latitude: 35.6762,
@@ -23,6 +24,9 @@ const tokyoRegion = {
   latitudeDelta: 0.01,
   longitudeDelta: 0.01,
 };
+
+// Variable to see if the sightings have been retrieved from the DB.
+let sightingsGotten = false;
 
 // Creates a Map Screen, where a map is shown (hopefully together with sightings)
 // and the user can find their location on the map.
@@ -33,12 +37,16 @@ const MapScreen = () => {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [showMap, setShowMap] = useState(true);
+  const arrayOfSightings = useState([]);
   const [region, setRegion] = useState({
     latitude: 51.5079145,
     longitude: -0.0899163,
     latitudeDelta: 0.01,
     longitudeDelta: 0.01,
   });
+
+  // DB URL.
+  const baseUrl = 'https://potatoapi.lucbucher.ch';
 
   const navigation = useNavigation();
 
@@ -55,6 +63,37 @@ const MapScreen = () => {
       setLocation(location);
     })();
   }, []);
+
+
+  // Fetches the sightings data from the database.
+  async function GetSightings() {
+    const res = await fetch(baseUrl + '/Sightings')
+    return await res.json();
+  }
+
+  // Gets the data from the database and stores it in a variable.
+  if(!sightingsGotten) {
+    sightingsGotten = true;
+
+    GetSightings()
+      .then(function (result) {
+
+        // For each database entry, a temporary marker is created.
+        result.forEach(function (sighting) {
+          let tempMarker = {
+            longitude: parseFloat(sighting.longitude),
+            latitude: parseFloat(sighting.latitude),
+            latitudeDelta: 0.01,
+            longitudeDelta: 0.01,
+          }
+
+          // Temporary markers are stored in the arrayOfSightings array.
+          arrayOfSightings.push(tempMarker);
+
+          console.log(tempMarker);
+        })
+      })
+  }
 
   let text = "Waiting..";
   let long;
@@ -131,7 +170,14 @@ const MapScreen = () => {
           style={styles.map}
           onRegionChangeComplete={(region) => setRegion(region)}
           customMapStyle={map}
-        ></MapView>
+        >
+          {arrayOfSightings.map(sight =>(
+              <Marker coordinate={sight}/>
+            ))
+          }
+          <Marker coordinate={tokyoRegion}/>
+
+        </MapView>
       ) : (
         <View>
           <Text>No map</Text>

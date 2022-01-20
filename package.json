@@ -10,6 +10,7 @@
     "@react-navigation/bottom-tabs": "^6.0.9",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.5",
+    "assert": "^2.0.0",
     "clarifai": "^2.9.1",
     "dotenv": "^10.0.0",
     "eas": "^0.1.0",
