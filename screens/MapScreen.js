@@ -16,7 +16,6 @@ import {
   TouchableOpacity,
   Platform,
 } from "react-native";
-import {template} from "@babel/core";
 
 const tokyoRegion = {
   latitude: 35.6762,
