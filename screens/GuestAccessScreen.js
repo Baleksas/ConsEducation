@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 
-import { useNavigation } from "@react-navigation/core";
-import React, { useState } from "react";
+import {useNavigation} from "@react-navigation/core";
+import React, {useState} from "react";
 
 import {
     Dimensions,
@@ -32,18 +32,18 @@ const GuestAccessScreen = () => {
 
     // Navigation to Login page.
     const handleLogin = () => {
-      navigation.navigate("Login");
+        navigation.navigate("Login");
     };
 
     // Navigation to Register page.
     const handleRegister = () => {
-      navigation.navigate("Register");
+        navigation.navigate("Register");
     };
 
     // Renders the page and its elements.
     return (
         <View style={styles.container}>
-            <Image source={require("../assets/logo2.png")} style={styles.logo} />
+            <Image source={require("../assets/logo2.png")} style={styles.logo}/>
             <View style={styles.loginTextContainer}>
                 <Text style={styles.loginText}>To access the full features of the app, please</Text>
                 <TouchableOpacity onPress={handleLogin}>

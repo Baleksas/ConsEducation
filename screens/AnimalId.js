@@ -11,41 +11,42 @@ import {
 
 // Creates an Animal information screen where the information
 // about chosen species is displayed.
-const AnimalId = ({ navigation, route }) => {
-  const { ind, works, animal } = route.params;
+const AnimalId = ({navigation, route}) => {
+    const {ind, works, animal} = route.params;
 
     // Renders the page and its elements.
-  return (
-    <View style={styles.container}>
-      <View style={styles.logoContainer}>
-        <Image source={require("../assets/logo.png")} style={styles.logo}/>
-      </View>
-      <View style={styles.textContainerContainer}>
-        <View style={styles.textContainer}>
-          <Text style={styles.text}>Name: {animal.name}</Text>
+    return (
+        <View style={styles.container}>
+            <View style={styles.logoContainer}>
+                <Image source={require("../assets/logo.png")} style={styles.logo}/>
+            </View>
+            <View style={styles.textContainerContainer}>
+                <View style={styles.textContainer}>
+                    <Text style={styles.text}>Name: {animal.name}</Text>
+                </View>
+                <View style={styles.textContainer}>
+                    <Text style={styles.text}>Scientific name: {animal.scName}</Text>
+                </View>
+                <View style={styles.textContainer}>
+                    <Text style={styles.text}>Informal Taxonomy: {animal.informalTaxonomy}</Text>
+                </View>
+                <View style={styles.textContainer}>
+                    <Text style={styles.text}>Genus: {animal.genus}</Text>
+                </View>
+                <View style={styles.textContainer}>
+                    <Text style={styles.text}>Family: {animal.family}</Text>
+                </View>
+                <View style={styles.textContainer}>
+                    <Text style={styles.text}>Rank: {animal.rank}</Text>
+                </View>
+                {animal.completeDistribution && (
+                    <View style={styles.textContainer}>
+                        <Text style={styles.text}>Complete
+                            distribution: {animal.completeDistribution ? "Yes" : "No"}</Text>
+                    </View>)}
+            </View>
         </View>
-        <View  style={styles.textContainer}>
-          <Text style={styles.text}>Scientific name: {animal.scName}</Text>
-        </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.text}>Informal Taxonomy: {animal.informalTaxonomy}</Text>
-        </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.text}>Genus: {animal.genus}</Text>
-        </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.text}>Family: {animal.family}</Text>
-        </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.text}>Rank: {animal.rank}</Text>
-        </View>
-        {animal.completeDistribution && (
-          <View style={styles.textContainer}>
-            <Text style={styles.text}>Complete distribution: {animal.completeDistribution ? "Yes" : "No"}</Text>
-          </View>)}
-      </View>
-    </View>
-  );
+    );
 };
 
 export default AnimalId;
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
     },
     textContainerContainer: {
-      marginTop: Dimensions.get("window").height * 0.08,
+        marginTop: Dimensions.get("window").height * 0.08,
     },
     logo: {
         width: Dimensions.get("window").height * 0.06,

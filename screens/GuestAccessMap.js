@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 
-import React, { useState} from "react";
-import { useNavigation } from "@react-navigation/core";
+import React, {useState} from "react";
+import {useNavigation} from "@react-navigation/core";
 
 import {
     StyleSheet,
@@ -34,14 +34,14 @@ const GuestAccessMap = () => {
     // DB URL.
     const baseUrl = 'https://potatoapi.lucbucher.ch';
 
-    // Fetches the sightings data from the database.
+    // Gets the sightings data from the database.
     async function GetSightings() {
         const res = await fetch(baseUrl + '/Sightings')
         return await res.json();
     }
 
     // Gets the data from the database and stores it in a variable.
-    if(!sightingGotten) {
+    if (!sightingGotten) {
         updateSightingGotten(true);
 
         GetSightings()
@@ -80,13 +80,13 @@ const GuestAccessMap = () => {
                 style={styles.map}
                 onRegionChangeComplete={(region) => setRegion(region)}
                 customMapStyle={map}>
-                {arrayOfSightings.map(sight =>(
+                {arrayOfSightings.map(sight => (
                     <Marker key={sight.id} image={require("../assets/marker1.png")}
-                    coordinate={{latitude: sight.latitude, longitude: sight.longitude}}/>
+                            coordinate={{latitude: sight.latitude, longitude: sight.longitude}}/>
                 ))}
             </MapView>
             <View style={styles.logoContainer}>
-                <Image source={require("../assets/logo.png")} style={styles.logo} />
+                <Image source={require("../assets/logo.png")} style={styles.logo}/>
             </View>
             <View style={styles.buttonContainer}>
                 <View style={styles.currentButton}>

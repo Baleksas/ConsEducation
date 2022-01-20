@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */
 
-import React, { useState } from "react";
+import React, {useState} from "react";
 
 import {
     StyleSheet,
@@ -9,7 +9,7 @@ import {
     TouchableOpacity,
     Dimensions, Image, Platform
 } from "react-native";
-import { useNavigation } from "@react-navigation/core";
+import {useNavigation} from "@react-navigation/core";
 
 // Creates a Guest Access Animal Selection Screen, where the user can choose to
 // navigate between the different species based on their class.
@@ -36,7 +36,7 @@ const SelectionScreen = () => {
     // Renders the page and its elements.
     return (
         <View>
-            <Image source={require("../assets/logo.png")} style={styles.logo} />
+            <Image source={require("../assets/logo.png")} style={styles.logo}/>
             <View style={styles.animalContainer}>
                 <View style={styles.animalButtonContainer}>
                     <TouchableOpacity
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "row",
         position: "absolute",
-        top: Platform.OS === 'ios'? Dimensions.get("window").height * 0.94: Dimensions.get("window").height * 0.982,
+        top: Platform.OS === 'ios' ? Dimensions.get("window").height * 0.94 : Dimensions.get("window").height * 0.982,
     },
     button: {
         backgroundColor: "#A2C23D",
